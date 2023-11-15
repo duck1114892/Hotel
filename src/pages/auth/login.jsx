@@ -18,7 +18,8 @@ const LoginPage = () => {
         if (data.statusCode === 201) {
             message.success(`Xin Chào ${data.data.user.email}`)
             localStorage.setItem('access_token', data.data.access_token)
-            useNagi('/book')
+            useNagi('/')
+            window.location.reload()
         }
         else {
             message.error(data.message)

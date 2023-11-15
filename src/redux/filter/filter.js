@@ -2,7 +2,8 @@
 
 const initialState = {
     category: [],
-    isFilter: false
+    isFilter: false,
+    range: ''
 }
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -10,7 +11,17 @@ const rootReducer = (state = initialState, action) => {
             return { ...state, category: action.payload }
         case 'IS_FILTER':
             return { ...state, isFilter: action.payload }
+        case 'RANGE':
+            return { ...state, range: action.payload }
+        case 'DEFAULT':
+            return {
+                category: [],
+                isFilter: false,
+                range: ''
+            }
         default: return state
+
+
     }
 
 }

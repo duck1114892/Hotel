@@ -1,26 +1,119 @@
-import { UserOutlined } from "@ant-design/icons"
-import { Avatar } from "antd"
+import { AlignCenterOutlined, ShoppingCartOutlined, UserOutlined } from "@ant-design/icons"
+import { Avatar, Badge, Button, Dropdown, Popover } from "antd"
+import DropdownButton from "antd/es/dropdown/dropdown-button"
 import Search from "antd/es/input/Search"
 import { Header } from "antd/es/layout/layout"
-
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import { getBookManeger, logout } from "../service/api"
+import '../../public/scss/search.css'
 const HeaderComponent = () => {
+    const [search, setSearch] = useState()
+    const [dataSearch, setDataSearch] = useState([])
+    const isAdmin = useSelector(state => state.loginReducer)
+    const cartData = useSelector(state => state.addCartReducer)
+
+    console.log(cartData)
+    const logoutApi = async () => {
+        await logout()
+        window.location.reload()
+        localStorage.removeItem('access_token')
+    }
+    const items = []
+
+
+    if (isAdmin.user.role === 'ADMIN') {
+        items.push(
+            {
+                item: '1',
+                label: (
+                    <Link style={{ fontSize: "16px" }} to={'/admin/user'}>Trang Admin</Link>
+                )
+            })
+    }
+
+    if (isAdmin.isAuth) {
+        items.push(
+            {
+                item: '2',
+                label: (
+                    <Link onClick={logoutApi} style={{ fontSize: "16px" }}>Đăng Xuất</Link>
+                )
+            })
+    }
+
+    const content = (
+        <div >
+            {dataSearch.map((item) => {
+                return (
+                    <Link className="value" style={{ color: 'black' }} to={`/book-detail/${item._id}`}>
+                        <div className="value" style={{ display: 'flex', width: "900px", marginTop: "10px" }}>
+                            <img src={`${import.meta.env.VITE_BE_URL}/images/book/${item.thumbnail}`} style={{ width: "40px", height: "40px", marginRight: "3%", }} alt="" />
+                            <div>{item.mainText}</div>
+                        </div></Link>
+                )
+            })}
+        </div>
+    );
+
+    const contextCart = (
+        <div >
+            {cartData.cart.map((item) => {
+                return (
+                    <Link className="value" style={{ color: 'black' }} to={``}>
+                        <div className="value" style={{ display: 'flex', width: "500px", marginTop: "10px" }}>
+                            <img src={`${import.meta.env.VITE_BE_URL}/images/book/${item.detail.img}`} style={{ width: "40px", height: "40px", marginRight: "3%", }} alt="" />
+                            <div>{item.detail.name} <div>Số Lượng: {item.quantity}</div> </div>
+                        </div></Link>
+                )
+            })}
+        </div>
+    )
+    const searchHandler = (e) => {
+        console.log(e.target.value)
+        setSearch(e.target.value)
+    }
+    useEffect(() => {
+        const getData = async () => {
+            const dataApi = await getBookManeger()
+            let data = dataApi.data
+
+            const result = data.filter((item) => {
+                return item.mainText.includes(search)
+            })
+
+            setDataSearch(result)
+        }
+        getData()
+
+    }, [search])
+
     return (<> <Header
         style={{
             position: 'fixed',
-            backgroundColor: '#00B7E4',
+            backgroundColor: "white",
             top: 0,
             zIndex: 1,
             width: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: "space-around",
-
+            height: "80px"
 
         }}
     >
-        <Avatar size={80} shape='circle' icon={<img src="https://static.vecteezy.com/system/resources/thumbnails/019/900/152/small/old-book-watercolor-illustration-png.png"></img>} />
-        <Search placeholder="Bạn Cần Tìm Gì ?" size="" style={{ width: '60%' }}></Search>
-        <Avatar size="large" shape="circle" icon={<UserOutlined />}></Avatar>
-    </Header></>)
+        <Link style={{ textDecoration: 'none', color: 'black', fontSize: "20px" }} to={'/'}><div>WW BOOK</div></Link>
+
+        <Popover visible={search ? true : false} content={content} trigger="click"><Search onChange={(e) => searchHandler(e)} placeholder="Bạn Cần Tìm Gì ?" size="" style={{ width: '60%' }}></Search></Popover>
+        <Popover placement="bottomRight" content={contextCart}><Badge count={cartData.cart.length}><Button shape="circle"><ShoppingCartOutlined /></Button></Badge> </Popover>
+        {
+            isAdmin.isAuth ? (<Dropdown placement="bottom" menu={{ items }}>
+                <Avatar size="large" shape="circle" icon={<UserOutlined />}></Avatar>
+            </Dropdown>) : <Link style={{ textDecoration: 'none', color: 'black', fontSize: "20px" }} to={'/login'}>Đăng Nhập</Link>
+        }
+
+
+    </Header ></>)
 }
 export default HeaderComponent

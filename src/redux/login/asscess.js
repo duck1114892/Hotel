@@ -11,7 +11,9 @@ const initialState = {
 }
 const loginReducer = (state = initialState, action) => {
     switch (action.type) {
+
         case 'LOGIN':
+            console.log(state)
             return { ...state, isAuth: true, user: action.payload }
         default: return state
     }

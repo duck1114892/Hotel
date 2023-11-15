@@ -14,21 +14,25 @@ import { refeshToken } from './service/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { isLogin } from './redux/login/action';
 import loginReducer from './redux/login/asscess';
+import AdminPage from './pages/auth/adminPage';
+import TableUser from './component/admin/tableUser';
+import TableBook from './component/admin/tableBook';
 
 export default function App() {
   const dispatch = useDispatch()
-  const dataReduce = useSelector(state => state.loginReducer)
-  console.log('lmao>>>>', dataReduce)
+
+
   const getInfo = async () => {
     const token = await refeshToken()
     dispatch(isLogin(token.data.user))
-    console.log('hahah', token)
+
   }
   useEffect(() => {
 
     getInfo()
 
   }, [])
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -37,7 +41,7 @@ export default function App() {
       </div>,
       children: [
         {
-          path: '/book',
+          path: '/',
           element: <BookPage />
         },
 
@@ -59,6 +63,20 @@ export default function App() {
       path: "/sign-up",
       element: <SignUpPage></SignUpPage>,
     },
+    {
+      path: "/admin",
+      element: <AdminPage></AdminPage>,
+      children: [
+        {
+          path: 'user',
+          element: <TableUser></TableUser>
+        },
+        {
+          path: 'book',
+          element: <TableBook></TableBook>
+        },
+      ]
+    }
   ]);
 
   return (

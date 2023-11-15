@@ -1,47 +1,79 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Pagination } from "antd";
+import { Button, Card, Image, Pagination, Spin, Tabs } from "antd";
 import Meta from "antd/es/card/Meta";
 import { Content } from "antd/es/layout/layout";
 import { Link, useLocation } from "react-router-dom";
 import { getBookApi } from "../service/api";
 import { useSelector } from "react-redux";
-import { filter } from "../redux/filter/action";
-import { ConsoleSqlOutlined } from "@ant-design/icons";
+
 
 const BookPage = () => {
     const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(false)
     const [total, setTotal] = useState()
     const [pageSize, setPageSize] = useState(8)
     const [book, setBook] = useState([]);
+    const [price, setPrice] = useState()
+    const [tab, setTab] = useState('-sold')
+    const [isTabFilter, setIsTabFilter] = useState(false)
     let cate = useSelector((state) => state.rootReducer.category);
-    let filterState = useSelector((state) => state.rootReducer.isFilter);
-
+    let rangeValue = useSelector((state) => state.rootReducer.range)
+    let category = cate.join(',')
+    const onChange = (key) => {
+        if (key) {
+            setIsTabFilter(!isTabFilter)
+            setTab(key)
+        }
+    };
+    const items = [
+        {
+            key: '-sold',
+            label: 'Bán Chạy',
+            children: <></>,
+        },
+        {
+            key: '-updatedAt',
+            label: 'Mới Nhất',
+            children: <></>,
+        },
+        {
+            key: '-price',
+            label: 'Giá Từ Cao Đến Thấp',
+            children: <></>,
+        },
+        {
+            key: 'price',
+            label: 'Giá Từ Thấp Đến Cao',
+            children: <></>,
+        }
+    ];
 
     useEffect(() => {
         let getBook = async () => {
-            let dataApi = await getBookApi(page, pageSize)
+            setLoading(true)
+            try {
+                let dataApi = await getBookApi(page, pageSize, tab, rangeValue, category)
+                let data = dataApi.data.result
+                setBook(data);
+                setTotal(dataApi.data.meta.total)
+                let priceFormat = data.map((item) => {
+                    let formatNumber = item.price
+                    return formatNumber.toLocaleString('vi-VN')
+                })
+                setPrice(priceFormat)
 
-            let data = dataApi.data.result
-            setTotal(dataApi.data.meta.total)
-            let dataFilter;
-            if (filterState) {
-                dataFilter = data.filter((item1) =>
-                    cate.some((item2) => item2 === item1.category)
-                );
-                setPageSize()
-                setTotal()
-            } else {
-                dataFilter = data;
+
+
+            } catch (error) {
+                console.log(error)
             }
-            setBook(dataFilter);
+            finally {
+                setLoading(false)
+            }
+
         }
         getBook()
-    }, [page, cate, filterState]);
-
-    // Calculate the total number of pages based on the number of books and pageSize
-
-
-
+    }, [page, cate, tab, rangeValue]);
 
     return (
         <Content
@@ -50,45 +82,51 @@ const BookPage = () => {
                 margin: "80px 0",
                 height: "100%",
             }}
-        >
-            <div style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>
-                {book.map((item) => (
-                    <div key={item._id} style={{ flex: "0 0 calc(25% - 16px)", margin: "8px" }}>
-                        <Card
-                            hoverable
-                            style={{
-                                width: 240,
-                            }}
-                            cover={
-                                <Link to={`/book-detail/${item._id}`}>
-                                    <img style={{ width: '100%' }} src="https://static2.vieon.vn/vieplay-image/poster_v4/2023/07/06/wkqqn3xh_660x946-chuthuathoichien2-tagtapmoi.png" alt={item.mainText} />
-                                </Link>} // Add an alt attribute
-                        >
-                            <Meta title={item.mainText} />
-                            <div
-                                style={{
-                                    width: "100%",
-                                    textOverflow: "ellipsis",
-                                    overflow: "hidden",
-                                    whiteSpace: "nowrap",
-                                }}
-                            >
-                                {item.author}
-                            </div>
-                            <div style={{ fontWeight: 600 }}>{item.price} VND</div>
-                        </Card>
-                    </div>
-                ))}
-            </div>
-            <Pagination
-                style={{ width: "100%" }}
-                current={page}
-                onChange={(page) => {
-                    setPage(page);
-                }}
-                total={total} // Use totalPages to calculate the total
-                pageSize={8}
-            />
+        ><Tabs style={{ marginLeft: '1%' }} defaultActiveKey="-sold" items={items} onChange={onChange} />
+            {loading ? (<Spin>Loading...</Spin>) :
+                <> <div style={{ width: "100%", display: "flex", flexWrap: "wrap", }}>
+                    {book.map((item, index) => (
+                        <div key={item._id} style={{ flex: "0 0 calc(25% - 16px)", margin: "4px" }}>
+                            <Link to={`/book-detail/${item._id}`}>
+                                <Card
+                                    hoverable
+                                    style={{
+                                        width: 270,
+                                    }}
+                                    cover={
+
+                                        <Image preview={false} height={300} src={`${import.meta.env.VITE_BE_URL}/images/book/${item.thumbnail}`} alt={item.mainText} />
+                                    } // Add an alt attribute
+                                >
+                                    <Meta title={item.mainText} />
+                                    <div
+                                        style={{
+                                            width: "100%",
+                                            textOverflow: "ellipsis",
+                                            overflow: "hidden",
+                                            whiteSpace: "nowrap",
+                                        }}
+                                    >
+                                        {item.author}
+                                    </div>
+                                    <div style={{ fontWeight: 600 }}>{price[index]} VND</div>
+                                </Card>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
+                    <Pagination
+                        style={{ width: "100%" }}
+                        current={page}
+                        onChange={(page) => {
+                            setPage(page);
+                        }}
+                        total={total} // Use totalPages to calculate the total
+                        pageSize={pageSize}
+                    />
+                </>
+            }
+
         </Content>
     );
 };

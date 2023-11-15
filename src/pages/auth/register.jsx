@@ -6,7 +6,7 @@ import { useState } from "react";
 import { registerApi } from "../../service/api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { autoFill } from "../../redux/autofil/action";
+
 const SignUpPage = () => {
     let [loading, setLoading] = useState(false)
     let navigate = useNavigate()

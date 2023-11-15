@@ -10,3 +10,15 @@ export const isFilter = (data) => {
         payload: data
     }
 }
+export const isRange = (data) => {
+    console.log(data)
+    return {
+        type: 'RANGE',
+        payload: data
+    }
+}
+export const setDefault = () => {
+    return {
+        type: 'DEFAULT',
+    }
+}
