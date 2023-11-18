@@ -109,6 +109,7 @@ const HeaderComponent = () => {
         <Header
             className="headerMobile"
             style={{
+                display: 'flex',
                 position: 'fixed',
                 backgroundColor: 'white',
                 top: 0,
@@ -116,38 +117,39 @@ const HeaderComponent = () => {
                 width: '100%',
                 height: '80px',
                 paddingTop: "1%",
+                justifyContent: "space-around",
+                alignItems: "center"
             }}
         >
-            <Row gutter={17} justify="space-between" align="middle" style={{ width: '100%', padding: '0 20px' }}>
-                <Col span={5}>
-                    <Link style={{ textDecoration: 'none', color: 'black', fontSize: '20px' }} to={'/'}>
-                        <div className="logoMoblie">WW BOOK</div>
-                    </Link>
-                </Col>
-                <Col span={10}>
-                    <Popover className="popoverMobile" visible={search ? true : false} content={content} trigger="click">
-                        <Search onChange={(e) => searchHandler(e)} placeholder="Bạn Cần Tìm Gì ?" size="" style={{ width: '100%' }} />
-                    </Popover>
-                </Col>
-                <Col span={3}>
-                    <Popover placement="bottomRight" content={contextCart}>
-                        <Badge count={cartData.cart.length}>
-                            <Button style={{ width: '30px' }} shape="circle">
-                                <ShoppingCartOutlined />
-                            </Button>
-                        </Badge>
-                    </Popover>
-                </Col>
-                <Col span={4}>
-                    {isAdmin.isAuth ? (
-                        <AvataComponent />
-                    ) : (
-                        <Link className="login" style={{ textDecoration: 'none', color: 'black', fontSize: '20px' }} to={'/login'}>
-                            Đăng Nhập
-                        </Link>
-                    )}
-                </Col>
-            </Row>
+
+
+            <Link style={{ textDecoration: 'none', color: 'black', fontSize: '20px' }} to={'/'}>
+                <div className="logoMoblie">WW BOOK</div>
+            </Link>
+
+
+            <Popover className="popoverMobile" visible={search ? true : false} content={content} trigger="click">
+                <Search onChange={(e) => searchHandler(e)} placeholder="Bạn Cần Tìm Gì ?" size="" style={{ width: '50%' }} />
+            </Popover>
+
+
+            <Popover placement="bottomRight" content={contextCart}>
+                <Badge count={cartData.cart.length}>
+                    <Button style={{ width: '30px' }} shape="circle">
+                        <ShoppingCartOutlined />
+                    </Button>
+                </Badge>
+            </Popover>
+
+            {isAdmin.isAuth ? (
+                <AvataComponent />
+            ) : (
+                <Link className="login" style={{ textDecoration: 'none', color: 'black', fontSize: '20px' }} to={'/login'}>
+                    Đăng Nhập
+                </Link>
+            )}
+
+
         </Header>
     );
 };
