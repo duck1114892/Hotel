@@ -119,12 +119,12 @@ const HeaderComponent = () => {
             }}
         >
             <Row gutter={17} justify="space-between" align="middle" style={{ width: '100%', padding: '0 20px' }}>
-                <Col span={2}>
+                <Col span={5}>
                     <Link style={{ textDecoration: 'none', color: 'black', fontSize: '20px' }} to={'/'}>
                         <div className="logoMoblie">WW BOOK</div>
                     </Link>
                 </Col>
-                <Col span={14}>
+                <Col span={10}>
                     <Popover className="popoverMobile" visible={search ? true : false} content={content} trigger="click">
                         <Search onChange={(e) => searchHandler(e)} placeholder="Bạn Cần Tìm Gì ?" size="" style={{ width: '100%' }} />
                     </Popover>

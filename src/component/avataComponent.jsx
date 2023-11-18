@@ -51,7 +51,7 @@ const AvataComponent = ({ props }) => {
 
 
     return (<Dropdown placement="bottom" menu={{ items }}>
-        <Avatar size="large" shape="circle" icon={<UserOutlined />}></Avatar>
+        <Avatar className="avatar" size="large" shape="circle" icon={<UserOutlined />}></Avatar>
     </Dropdown>)
 }
 export default AvataComponent
