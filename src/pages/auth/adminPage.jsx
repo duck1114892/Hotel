@@ -7,7 +7,7 @@ import {
     UserOutlined,
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, Table, theme } from 'antd';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import TableUser from '../../component/admin/tableUser';
 import { useSelector } from 'react-redux';
 import HeaderComponent from '../../component/header';
@@ -36,8 +36,9 @@ const items = [
 
 const AdminPage = () => {
     const isAdmin = useSelector(state => state.loginReducer)
+    const nagivate = useNavigate()
     if (isAdmin.user.role !== 'ADMIN') {
-        window.location.replace('/book')
+        nagivate('/')
     }
     const [collapsed, setCollapsed] = useState(false);
     const {

@@ -68,7 +68,7 @@ const TableUser = () => {
                 }
                 setData(finalData)
             } catch (error) {
-
+                console.log(error)
             }
             finally {
                 setLoading(false)
