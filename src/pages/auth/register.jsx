@@ -16,12 +16,9 @@ const SignUpPage = () => {
         const data = await registerApi(values.username, values.email, values.phone, values.password)
         if (data.statusCode === 201) {
             message.success(`Đã Đăng Ký ${data.data.email}`)
-            setLoading(true)
-            dispatch(autoFill(values))
-            setTimeout(() => {
-                setLoading(false)
-                navigate('/login')
-            }, 1000)
+
+            navigate('/login')
+
         }
         else {
             message.error(data.message)
