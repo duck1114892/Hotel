@@ -2,19 +2,18 @@ import { UserOutlined } from "@ant-design/icons"
 import { Avatar, Dropdown } from "antd"
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useNavigation } from "react-router-dom";
 import { logout } from "../service/api";
 
 const AvataComponent = ({ props }) => {
     const items = []
 
     const isAdmin = useSelector(state => state.loginReducer)
-
+    const nagivate = useNavigate()
     const logoutApi = async () => {
         await logout()
-        window.location.reload()
         localStorage.clear()
-
+        nagivate('/login')
     }
     if (isAdmin.user.role === 'ADMIN') {
         items.push(

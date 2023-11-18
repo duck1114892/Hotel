@@ -14,13 +14,17 @@ const HeaderComponent = () => {
     const [dataSearch, setDataSearch] = useState([])
     const isAdmin = useSelector(state => state.loginReducer)
     const cartData = useSelector(state => state.addCartReducer)
-    const useNagi = useNavigate()
+
 
     const logoutApi = async () => {
-        await logout()
-        useNagi('/')
-        localStorage.clear()
-    }
+        try {
+            await logout();
+            localStorage.clear();
+        } catch (error) {
+
+            console.error('Đã xảy ra lỗi khi đăng xuất:', error);
+        }
+    };
     const items = []
 
 
@@ -45,7 +49,7 @@ const HeaderComponent = () => {
             {
                 item: '2',
                 label: (
-                    <Link onClick={logoutApi} style={{ fontSize: "16px" }}>Đăng Xuất</Link>
+                    <Link to={"/login"} onClick={logoutApi} style={{ fontSize: "16px" }}>Đăng Xuất</Link>
                 )
             },
         )
