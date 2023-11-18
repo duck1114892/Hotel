@@ -101,7 +101,7 @@ const PayPage = () => {
                     }}><ArrowLeftOutlined /></Button></Link>
 
                     <Steps current={current} style={{ width: "50%" }} items={items}></Steps>
-                    <AvataComponent></AvataComponent>
+
                 </div>
                 {current === item.length - 1 ? (
                     <div style={{ width: "100%", height: "60vh", display: "flex", justifyContent: "center" }}>

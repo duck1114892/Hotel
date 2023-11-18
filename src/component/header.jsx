@@ -17,7 +17,8 @@ const HeaderComponent = () => {
 
     console.log(cartData)
     const logoutApi = async () => {
-        await logout()
+        const res = await logout()
+        console.log(res)
         window.location.reload()
         localStorage.clear()
     }
@@ -118,7 +119,7 @@ const HeaderComponent = () => {
         <Link style={{ textDecoration: 'none', color: 'black', fontSize: "20px" }} to={'/'}><div>WW BOOK</div></Link>
 
         <Popover visible={search ? true : false} content={content} trigger="click"><Search onChange={(e) => searchHandler(e)} placeholder="Bạn Cần Tìm Gì ?" size="" style={{ width: '60%' }}></Search></Popover>
-        <Popover placement="bottomRight" content={contextCart}><Badge count={cartData.cart.length}><Button size="large" shape="circle"><ShoppingCartOutlined /></Button></Badge> </Popover>
+        <Popover placement="bottomRight" content={contextCart}><Badge count={cartData.cart.length}><Button style={{ width: "30px" }} shape="circle"><ShoppingCartOutlined /></Button></Badge> </Popover>
         {
             isAdmin.isAuth ? <AvataComponent></AvataComponent> : <Link style={{ textDecoration: 'none', color: 'black', fontSize: "20px" }} to={'/login'}>Đăng Nhập</Link>
         }
