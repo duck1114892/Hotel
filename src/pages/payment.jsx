@@ -65,7 +65,7 @@ const PayPage = () => {
         };
 
         fetchBookData();
-    }, [])
+    }, [cartData.cart])
     const [current, setCurrent] = useState(0);
     const next = () => {
         setCurrent(current + 1);
