@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
-import { Button, Checkbox, Col, Form, Input, InputNumber, Layout, Row, theme } from 'antd';
+import { Button, Checkbox, Col, Form, Input, InputNumber, Layout, Menu, Row, theme } from 'antd';
 import { getCateGory } from "../service/api";
 import { filter, isFilter, isRange, setDefault } from '../redux/filter/action';
-import { RedoOutlined, RollbackOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined, RedoOutlined, RollbackOutlined } from '@ant-design/icons';
 
 const SiderComponent = () => {
     const [form] = Form.useForm();
@@ -11,6 +11,10 @@ const SiderComponent = () => {
     const [loading, setLoading] = useState(false);
     const [restField, setResetField] = useState(false)
     const dispatch = useDispatch();
+    const [collapsed, setCollapsed] = useState(false);
+    const toggleCollapsed = () => {
+        setCollapsed(!collapsed);
+    };
 
     const onChange = (checkedValues) => {
         dispatch(filter(checkedValues));
@@ -75,6 +79,7 @@ const SiderComponent = () => {
             {restField ? (<Button shape='circle' style={{ position: 'absolute', right: '10px' }} onClick={() => cancelForm()}>
                 <RedoOutlined />
             </Button>) : <></>}
+
             <Form
                 name='range'
                 form={form}
@@ -102,7 +107,7 @@ const SiderComponent = () => {
                 <div style={{ textAlign: 'center' }}>
                     <div style={{ fontSize: "20px", textAlign: 'center', width: '100%' }}>Khoảng Giá :</div>
 
-                    <Row gutter={16}>
+                    <Row gutter={8}>
                         <Col span={11}>
                             <Form.Item
                                 name="from"
@@ -115,7 +120,6 @@ const SiderComponent = () => {
                         <Col span={11}>
                             <Form.Item
                                 name="to"
-
                             >
                                 <InputNumber name='to' placeholder='Đến' />
                             </Form.Item>
@@ -131,6 +135,7 @@ const SiderComponent = () => {
                     </Form.Item>
                 </div>
             </Form>
+
         </Layout.Sider>
     );
 }

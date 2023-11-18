@@ -17,6 +17,9 @@ import loginReducer from './redux/login/asscess';
 import AdminPage from './pages/auth/adminPage';
 import TableUser from './component/admin/tableUser';
 import TableBook from './component/admin/tableBook';
+import ViewOrder from './pages/viewOrder';
+import Dashboard from './component/admin/dashboard';
+import TableOrder from './component/admin/ordeTable';
 
 export default function App() {
   const dispatch = useDispatch()
@@ -43,14 +46,12 @@ export default function App() {
         {
           path: '/',
           element: <BookPage />
+
         },
 
-        {
-          path: '/payment',
-          element: <PayPage />
-        }
       ]
     },
+
     {
       path: '/book-detail/:id',
       element: <BookDetailPage />
@@ -58,6 +59,10 @@ export default function App() {
     {
       path: "/login",
       element: <LoginPage></LoginPage>,
+    },
+    {
+      path: '/payment',
+      element: <PayPage />
     },
     {
       path: "/sign-up",
@@ -75,7 +80,19 @@ export default function App() {
           path: 'book',
           element: <TableBook></TableBook>
         },
+        {
+          path: 'dashboard',
+          element: <Dashboard></Dashboard>
+        },
+        {
+          path: 'order',
+          element: <TableOrder></TableOrder>
+        },
       ]
+    },
+    {
+      path: '/history',
+      element: <ViewOrder></ViewOrder>
     }
   ]);
 

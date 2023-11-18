@@ -8,7 +8,7 @@ import SiderComponent from "../component/sider"
 const HomePage = () => {
     return (<>   <HeaderComponent></HeaderComponent>
         <Layout   >
-            <div style={{ height: '100vh' }}><SiderComponent></SiderComponent></div>
+            <div className="slider" style={{ height: '100vh' }}><SiderComponent></SiderComponent></div>
 
             <div style={{ height: '100vh', overflow: "auto", width: "100%" }}><Outlet></Outlet></div>
 

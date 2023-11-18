@@ -22,14 +22,15 @@ function getItem(label, key, icon, children) {
     };
 }
 const items = [
-    getItem('Table User', '1', <Link to={'user'}><PieChartOutlined /></Link>),
-    getItem('Table Book', '2', <Link to={'book'}><PieChartOutlined /></Link>),
+    getItem('Dashboard', '1', <Link to={'dashboard'}><PieChartOutlined /></Link>),
+    getItem('Table User', '2', <Link to={'user'}><PieChartOutlined /></Link>),
+    getItem('Table Book', '3', <Link to={'book'}><PieChartOutlined /></Link>),
+    getItem('Table Order', '4', <Link to={'order'}><PieChartOutlined /></Link>),
+
 
 ];
 
-const onChange = (pagination, filters, sorter, extra) => {
-    console.log('params', pagination, filters, sorter, extra);
-};
+
 
 
 

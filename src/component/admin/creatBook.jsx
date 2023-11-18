@@ -6,10 +6,8 @@ import { callUploadBookImg, createBook, getCateGory } from '../../service/api'; 
 const CreateBook = (props) => {
     const [form] = Form.useForm();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isSubmit, setIsSubmit] = useState(false);
     const [loading, setLoading] = useState(false);
     const [loadingSlider, setLoadingSlider] = useState(false);
-
     const [imageUrl, setImageUrl] = useState("");
     const [category, setCategory] = useState([])
     const [dataThumbnail, setDataThumbnail] = useState([])

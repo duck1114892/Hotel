@@ -67,3 +67,15 @@ export const callUploadBookImg = (fileImg) => {
         },
     });
 }
+export const callOrder = (order) => {
+    return axios.post('/api/v1/order', order)
+}
+export const callHistory = () => {
+    return axios.get('/api/v1/history')
+}
+export const callDashboard = () => {
+    return axios.get('/api/v1/database/dashboard')
+}
+export const callOrderLsit = (page, pageSize) => {
+    return axios.get(`/api/v1/order?current=${page}&pageSize=${pageSize}`)
+}

@@ -8,6 +8,7 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { getBookManeger, logout } from "../service/api"
 import '../../public/scss/search.css'
+import AvataComponent from "./avataComponent"
 const HeaderComponent = () => {
     const [search, setSearch] = useState()
     const [dataSearch, setDataSearch] = useState([])
@@ -18,7 +19,7 @@ const HeaderComponent = () => {
     const logoutApi = async () => {
         await logout()
         window.location.reload()
-        localStorage.removeItem('access_token')
+        localStorage.clear()
     }
     const items = []
 
@@ -38,9 +39,16 @@ const HeaderComponent = () => {
             {
                 item: '2',
                 label: (
+                    <Link to={'/order'} style={{ fontSize: "16px" }}>Lịch Sử Đặt Hàng</Link>
+                )
+            },
+            {
+                item: '2',
+                label: (
                     <Link onClick={logoutApi} style={{ fontSize: "16px" }}>Đăng Xuất</Link>
                 )
-            })
+            },
+        )
     }
 
     const content = (
@@ -51,7 +59,8 @@ const HeaderComponent = () => {
                         <div className="value" style={{ display: 'flex', width: "900px", marginTop: "10px" }}>
                             <img src={`${import.meta.env.VITE_BE_URL}/images/book/${item.thumbnail}`} style={{ width: "40px", height: "40px", marginRight: "3%", }} alt="" />
                             <div>{item.mainText}</div>
-                        </div></Link>
+                        </div>
+                    </Link>
                 )
             })}
         </div>
@@ -59,15 +68,18 @@ const HeaderComponent = () => {
 
     const contextCart = (
         <div >
-            {cartData.cart.map((item) => {
-                return (
+            {cartData.cart.map((item, index) => {
+                return (<>
                     <Link className="value" style={{ color: 'black' }} to={``}>
-                        <div className="value" style={{ display: 'flex', width: "500px", marginTop: "10px" }}>
-                            <img src={`${import.meta.env.VITE_BE_URL}/images/book/${item.detail.img}`} style={{ width: "40px", height: "40px", marginRight: "3%", }} alt="" />
-                            <div>{item.detail.name} <div>Số Lượng: {item.quantity}</div> </div>
+                        <div className="value" style={{ display: 'flex', height: "60px", width: "500px", marginTop: "10px" }}>
+                            <img src={`${import.meta.env.VITE_BE_URL}/images/book/${item.detail.img}`} style={{ width: "50px", height: "50px", marginRight: "3%", }} alt="" />
+                            <div style={{ fontSize: "15px", overflow: "hidden", textOverflow: "ellipsis", }}>{item.detail.name} <div style={{ fontSize: "10px" }}>Số Lượng: {item.quantity}</div> </div>
                         </div></Link>
+                </>
+
                 )
             })}
+            {cartData.cart.length === 0 ? <div>Giỏ Hàng Trống</div> : <Link to={'/payment'}><Button style={{ marginTop: "4%", marginLeft: "75%" }} danger>Đến Giỏ Hàng</Button></Link>}
         </div>
     )
     const searchHandler = (e) => {
@@ -106,11 +118,9 @@ const HeaderComponent = () => {
         <Link style={{ textDecoration: 'none', color: 'black', fontSize: "20px" }} to={'/'}><div>WW BOOK</div></Link>
 
         <Popover visible={search ? true : false} content={content} trigger="click"><Search onChange={(e) => searchHandler(e)} placeholder="Bạn Cần Tìm Gì ?" size="" style={{ width: '60%' }}></Search></Popover>
-        <Popover placement="bottomRight" content={contextCart}><Badge count={cartData.cart.length}><Button shape="circle"><ShoppingCartOutlined /></Button></Badge> </Popover>
+        <Popover placement="bottomRight" content={contextCart}><Badge count={cartData.cart.length}><Button size="large" shape="circle"><ShoppingCartOutlined /></Button></Badge> </Popover>
         {
-            isAdmin.isAuth ? (<Dropdown placement="bottom" menu={{ items }}>
-                <Avatar size="large" shape="circle" icon={<UserOutlined />}></Avatar>
-            </Dropdown>) : <Link style={{ textDecoration: 'none', color: 'black', fontSize: "20px" }} to={'/login'}>Đăng Nhập</Link>
+            isAdmin.isAuth ? <AvataComponent></AvataComponent> : <Link style={{ textDecoration: 'none', color: 'black', fontSize: "20px" }} to={'/login'}>Đăng Nhập</Link>
         }
 
 

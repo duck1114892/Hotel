@@ -8,7 +8,7 @@ import { ShoppingCartOutlined } from "@ant-design/icons"
 import "react-image-gallery/styles/css/image-gallery.css";
 import { v4 as uuidv4 } from 'uuid'
 import ReactImageGallery from "react-image-gallery"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import addCartReducer from "../redux/cart/cartRedux"
 import { isAddCart } from "../redux/cart/action"
 
@@ -21,6 +21,7 @@ const BookDetailPage = () => {
     const [fileList, setFileList] = useState([]);
     const { id } = useParams()
     const dispatch = useDispatch()
+    const isLogin = useSelector(state => state.loginReducer.isAuth)
 
     const images = fileList.map((item) => {
         return {
@@ -29,23 +30,33 @@ const BookDetailPage = () => {
         }
     })
     const onFinish = (value) => {
-        if (data && value) {
-            const cart = {
-                quantity: value.quanity,
-                _id: data._id,
-                detail: {
+        if (isLogin) {
+            if (data && value && data.quantity !== 0) {
+                const cart = {
+                    quantity: value.quanity,
                     _id: data._id,
-                    img: data.thumbnail,
-                    name: data.mainText
+                    price: data.price,
+                    remain: data.quantity,
+                    detail: {
+                        _id: data._id,
+                        img: data.thumbnail,
+                        name: data.mainText
+                    }
                 }
-            }
-            message.success('Đã Thêm Vào Giỏ Hàng')
-            dispatch(isAddCart(cart))
+                console.log("this is remain>>>", data.quantity)
+                message.success('Đã Thêm Vào Giỏ Hàng')
+                dispatch(isAddCart(cart))
 
+            }
+            else {
+                message.error('Sản Phẩm Này Tạm Thời Hết Hàng')
+            }
         }
         else {
-            message.error('Lỗi')
+            message.error("Bạn Cần Phải Đăng Nhập")
         }
+
+
     }
     useEffect(() => {
         const getBookDetailApi = async () => {
@@ -65,7 +76,6 @@ const BookDetailPage = () => {
                     url: `${import.meta.env.VITE_BE_URL}/images/book/${dataApi.data.thumbnail}`,
                 };
 
-                // Check if slider is defined and has the sliderimg property
                 const sliderImages = dataApi.data.slider ? dataApi.data.slider.map((item) => ({
                     url: `${import.meta.env.VITE_BE_URL}/images/book/${item}`,
                 }))
@@ -83,13 +93,12 @@ const BookDetailPage = () => {
     }, [id]);
 
     const onChange = (value) => {
-        console.log(prices * value)
         setPrice(data.price * value)
         const number = data.price * value;
         const formattedNumber = number.toLocaleString('vi-VN');
         setVnd(formattedNumber)
     };
-
+    console.log(data.quantity)
     return (
         <>
             {/* `${import.meta.env.VITE_BE_URL}/images/book/${data.thumbnail}` */}
@@ -114,9 +123,10 @@ const BookDetailPage = () => {
                                     onFinish={onFinish}
                                 >
                                     <div className="item" style={{ marginTop: "8%" }} > Số Lượng : <Form.Item initialValue={1}
-                                        name="quanity"><InputNumber name="quantity" min={1} max={10} onChange={onChange} /></Form.Item></div>
+                                        name="quanity"><InputNumber name="quantity" min={1} max={data.quantity} onChange={onChange} /></Form.Item></div>
 
-                                    <div className="btn" style={{ marginTop: "20%", width: "100%" }}><Button style={{ width: "50%", height: "45px", marginRight: "8%" }} type="primary" > Buy </Button> <Button onClick={() => { form.submit() }} size='large' style={{ textAlign: 'center', width: "50%", height: "45px" }} ><ShoppingCartOutlined /></Button></div>
+                                    <div className="btn" style={{ marginTop: "20%", width: "100%" }}>
+                                        <Button onClick={() => { form.submit() }} danger size='large' type="primary" style={{ textAlign: 'center', width: "100%", height: "7ch" }} ><ShoppingCartOutlined style={{ fontSize: "25px" }} /></Button></div>
                                 </Form>
                             </div>
                         </div>

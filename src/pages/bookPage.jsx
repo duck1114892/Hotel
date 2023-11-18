@@ -11,7 +11,7 @@ const BookPage = () => {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false)
     const [total, setTotal] = useState()
-    const [pageSize, setPageSize] = useState(8)
+    const [pageSize, setPageSize] = useState(10)
     const [book, setBook] = useState([]);
     const [price, setPrice] = useState()
     const [tab, setTab] = useState('-sold')
@@ -79,23 +79,25 @@ const BookPage = () => {
         <Content
             className="site-layout"
             style={{
-                margin: "80px 0",
+                margin: "calc(5% + 10px) 0",
                 height: "100%",
             }}
         ><Tabs style={{ marginLeft: '1%' }} defaultActiveKey="-sold" items={items} onChange={onChange} />
-            {loading ? (<Spin>Loading...</Spin>) :
-                <> <div style={{ width: "100%", display: "flex", flexWrap: "wrap", }}>
+            {loading ? (<Spin><></></Spin>) :
+                <> <div style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>
                     {book.map((item, index) => (
-                        <div key={item._id} style={{ flex: "0 0 calc(25% - 16px)", margin: "4px" }}>
+                        <div key={item._id} style={{ flex: "0 0 calc(5% - 10px)", margin: "1px" }}>
                             <Link to={`/book-detail/${item._id}`}>
                                 <Card
                                     hoverable
                                     style={{
-                                        width: 270,
+                                        width: "calc(290px)",
+                                        margin: "2%"
+
                                     }}
                                     cover={
 
-                                        <Image preview={false} height={300} src={`${import.meta.env.VITE_BE_URL}/images/book/${item.thumbnail}`} alt={item.mainText} />
+                                        <Image preview={false} height={350} src={`${import.meta.env.VITE_BE_URL}/images/book/${item.thumbnail}`} alt={item.mainText} />
                                     } // Add an alt attribute
                                 >
                                     <Meta title={item.mainText} />
