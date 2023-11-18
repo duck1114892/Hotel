@@ -124,12 +124,12 @@ const HeaderComponent = () => {
                         <div className="logoMoblie">WW BOOK</div>
                     </Link>
                 </Col>
-                <Col span={16}>
+                <Col span={14}>
                     <Popover className="popoverMobile" visible={search ? true : false} content={content} trigger="click">
                         <Search onChange={(e) => searchHandler(e)} placeholder="Bạn Cần Tìm Gì ?" size="" style={{ width: '100%' }} />
                     </Popover>
                 </Col>
-                <Col span={2}>
+                <Col span={3}>
                     <Popover placement="bottomRight" content={contextCart}>
                         <Badge count={cartData.cart.length}>
                             <Button style={{ width: '30px' }} shape="circle">
@@ -138,7 +138,7 @@ const HeaderComponent = () => {
                         </Badge>
                     </Popover>
                 </Col>
-                <Col span={2}>
+                <Col span={4}>
                     {isAdmin.isAuth ? (
                         <AvataComponent />
                     ) : (
