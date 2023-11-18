@@ -13,7 +13,11 @@ const AvataComponent = ({ props }) => {
     const logoutApi = async () => {
         await logout()
         localStorage.clear()
-        nagivate('/login')
+        nagivate('/')
+        setTimeout(() => {
+            window.location.reload()
+        }, 100)
+
     }
     if (isAdmin.user.role === 'ADMIN') {
         items.push(
