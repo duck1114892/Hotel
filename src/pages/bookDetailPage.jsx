@@ -110,17 +110,17 @@ const BookDetailPage = () => {
     return (
         <>
             {/* `${import.meta.env.VITE_BE_URL}/images/book/${data.thumbnail}` */}
+            <HeaderComponent></HeaderComponent>
             <div className="container">
-                <HeaderComponent></HeaderComponent>
+
                 {loading ? (<Spin></Spin>) : (
                     <div className="childern">
-                        <div style={{ marginTop: "2%", width: "50%" }}>
+                        <div className="gallery" style={{ marginTop: "2%", width: "50%" }}>
                             <ReactImageGallery autoPlay={true} showPlayButton={false} showFullscreenButton={false} showBullets={false} showNav={false} items={images} />
-
                         </div>
                         <div className="content">
-                            <div style={{ fontFamily: " Helvetica, Arial, sans-serif", fontSize: "25px", textAlign: 'center' }}>{data.mainText}</div>
-                            <div style={{ width: "100%", marginTop: "8%" }}>{loading ? (<div>loading...</div>) : <span style={{ width: "100%", textAlign: 'center', fontSize: "40px", color: "red" }}>₫{vnd}</span>}
+                            <div className="mainText" style={{ fontFamily: " Helvetica, Arial, sans-serif", fontSize: "25px", textAlign: 'center' }}>{data.mainText}</div>
+                            <div style={{ width: "100%", marginTop: "8%" }}>{loading ? (<div>loading...</div>) : <span className="price" style={{ width: "100%", textAlign: 'center', fontSize: "40px", color: "red" }}>₫{vnd}</span>}
                             </div>
                             <div className="item"> <span>Tác Giả :</span>  <span style={{ color: "#018AF7" }}>{data.author}</span> </div>
                             <div className="item"><span>Thể Loại :</span> <span style={{ color: "black" }}>{data.category}</span></div>
@@ -138,10 +138,6 @@ const BookDetailPage = () => {
                                 </Form>
                             </div>
                         </div>
-                        <div>
-
-                        </div>
-
                     </div>
                 )}
 

@@ -49,5 +49,59 @@
 }
 
 .image-gallery-content .image-gallery-slide .image-gallery-image {
-    max-height: calc(70vh - 80px) !important;
+    max-height: calc(70vh - 80px);
+}
+
+@media only screen and (max-width: 768px) {
+    .childern {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 100vh;
+    }
+
+    .gallery {
+        width: 40% !important;
+        height: 20vh !important;
+
+    }
+
+    .content {
+        display: block;
+        width: 90%;
+        height: 30vh;
+        padding: 20px;
+        background-color: rgb(255, 255, 255);
+        border-radius: 20px;
+    }
+
+    .content div {
+        font-size: 10px;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+
+
+
+    .item {
+        margin-top: 9%;
+        color: #7a7a7a;
+    }
+
+    .item span {
+        font-size: 10px;
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+    }
+
+    .mainText {
+        font-size: 20px !important;
+    }
+
+    .price {
+        font-size: 20px !important;
+    }
 }

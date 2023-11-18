@@ -1,4 +1,4 @@
-import { Steps, Form, InputNumber, Row, Col, Button, Input, message, Empty } from 'antd';
+import { Steps, Form, InputNumber, Row, Col, Button, Input, message, Empty, Image } from 'antd';
 import '../../public/scss/payment.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -121,12 +121,13 @@ const PayPage = () => {
 
             <div className="containers">
                 <div className="headers" style={{ display: "flex", justifyContent: "space-around", marginTop: "2%", height: "4vh", backgroundColor: "white" }}>
+
                     <Link to="/"><Button shape='circle' style={{
                         position: "absolute",
                         left: '100px'
                     }}><ArrowLeftOutlined /></Button></Link>
 
-                    <Steps current={current} style={{ width: "50%" }} items={items}></Steps>
+                    <Steps className='step' size='small' current={current} style={{ width: "50%" }} items={items}></Steps>
                     <AvataComponent></AvataComponent>
                 </div>
                 {current === item.length - 1 ? (
@@ -142,7 +143,10 @@ const PayPage = () => {
                             {cartData.cart.map((item, index) => {
                                 const itemForm = `form-${index}`;
                                 return (
-                                    <Row key={index}>
+                                    <Row style={{
+                                        display: 'flex',
+
+                                    }} key={index}>
                                         {item.length === 0 ? (
                                             <></>
                                         ) : (
@@ -150,33 +154,13 @@ const PayPage = () => {
                                                 <Col span={12}>
                                                     <div
                                                         className="value"
-                                                        style={{
-                                                            display: 'flex',
-                                                            height: '60px',
-                                                            width: '100%',
-                                                            marginTop: '10px',
-                                                        }}
                                                     >
-                                                        <img
-                                                            src={`${import.meta.env.VITE_BE_URL}/images/book/${item.detail.img}`}
-                                                            style={{
-                                                                width: '60px',
-                                                                height: '60px',
-                                                                marginRight: '3%',
-                                                            }}
-                                                            alt=""
-                                                        />
+
                                                         <div
-                                                            style={{
-                                                                display: 'flex',
-                                                                alignItems: 'center',
-                                                                fontSize: '15px',
-                                                                overflow: 'hidden',
-                                                                textOverflow: 'ellipsis',
-                                                                height: '100%'
-                                                            }}
+                                                            className='mainTexts'
+
                                                         >
-                                                            {item.detail.name}{' '}
+                                                            {item.detail.name}
                                                         </div>
                                                     </div>
                                                 </Col>
@@ -186,13 +170,15 @@ const PayPage = () => {
                                                         onFinish={(value) => onFinish(value, item._id, item.remain)}
                                                     >
                                                         <Form.Item
+
                                                             name="quantity"
-                                                            style={{ marginTop: '15%' }}
+
                                                             initialValue={item.quantity}
 
                                                         >
                                                             <InputNumber
                                                                 name="quantity"
+                                                                className='quantity'
                                                                 min={0}
                                                                 max={handleQuantity(item._id)}
                                                                 onChange={(value) => onChange(value, item._id)}
@@ -209,10 +195,10 @@ const PayPage = () => {
 
                                                     </Form>
                                                 </Col>
-                                                <Col span={6} style={{ dheight: '100%', paddingTop: '3%' }}>
+                                                <Col className='price' span={6} style={{ height: '100%' }}>
                                                     <div style={{ fontSize: '20px', color: "red" }}>{(item.quantity * item.price)?.toLocaleString('vn-VN', { style: 'currency', currency: 'VND' })}</div>
                                                 </Col>
-                                                <Col span={1} style={{ dheight: '100%', paddingTop: '2%' }}>
+                                                <Col span={1} style={{ height: '100%' }}>
                                                     <Button type='primary' shape='circle' danger onClick={() => deleteCart(item._id)}><DeleteOutlined /></Button>
                                                 </Col>
                                             </>
@@ -224,7 +210,7 @@ const PayPage = () => {
                         </div>
                             <div className="detail">
                                 <div
-
+                                    className='detailMobile'
                                     style={{
                                         height: '50%',
                                         display: 'flex',
@@ -243,7 +229,7 @@ const PayPage = () => {
                                         <> <Form
                                             name="basic"
                                             layout="vertical"
-                                            style={{ width: "80%" }}
+                                            style={{ width: "80%", height: "50%" }}
                                             onFinish={handelOrder}
 
                                         >

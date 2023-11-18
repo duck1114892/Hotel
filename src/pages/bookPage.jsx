@@ -5,7 +5,7 @@ import { Content } from "antd/es/layout/layout";
 import { Link, useLocation } from "react-router-dom";
 import { getBookApi } from "../service/api";
 import { useSelector } from "react-redux";
-
+import '../../public/scss/book.css'
 
 const BookPage = () => {
     const [page, setPage] = useState(1);
@@ -79,16 +79,18 @@ const BookPage = () => {
         <Content
             className="site-layout"
             style={{
-                margin: "calc(5% + 10px) 0",
+                margin: "100px 0",
+                width: "100%",
                 height: "100%",
             }}
-        ><Tabs style={{ marginLeft: '1%' }} defaultActiveKey="-sold" items={items} onChange={onChange} />
+        ><Tabs className="tabMobile" style={{ marginLeft: '1%' }} defaultActiveKey="-sold" items={items} onChange={onChange} />
             {loading ? (<Spin><></></Spin>) :
                 <> <div style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>
                     {book.map((item, index) => (
-                        <div key={item._id} style={{ flex: "0 0 calc(5% - 10px)", margin: "1px" }}>
+                        <div className="itemCard" key={item._id} style={{ flex: "0 0 calc(5% - 10px)", margin: "1px" }}>
                             <Link to={`/book-detail/${item._id}`}>
                                 <Card
+                                    className="cardMobile"
                                     hoverable
                                     style={{
                                         width: "calc(290px)",
@@ -97,7 +99,7 @@ const BookPage = () => {
                                     }}
                                     cover={
 
-                                        <Image preview={false} height={350} src={`${import.meta.env.VITE_BE_URL}/images/book/${item.thumbnail}`} alt={item.mainText} />
+                                        <Image className="img" preview={false} style={{ height: '350px' }} src={`${import.meta.env.VITE_BE_URL}/images/book/${item.thumbnail}`} alt={item.mainText} />
                                     } // Add an alt attribute
                                 >
                                     <Meta title={item.mainText} />

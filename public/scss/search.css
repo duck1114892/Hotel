@@ -1,3 +1,29 @@
 .value:hover {
     background-color: rgb(249, 249, 249);
 }
+
+@media only screen and (max-width: 768px) {
+    .logoMoblie {
+        font-size: 10px;
+    }
+
+    .popoverMobile {
+        width: 40%;
+    }
+
+    .value {
+        width: 300px !important;
+    }
+
+    .cartBtn {
+        width: 40% !important;
+        font-size: 15px;
+        margin-left: 30% !important;
+    }
+
+    .headerMobile {
+        padding-top: 4% !important;
+    }
+}
+
+@media only screen and (min-width: 769px) {}

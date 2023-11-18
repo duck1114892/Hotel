@@ -1,0 +1,26 @@
+@media only screen and (max-width: 768px) {
+    .cardMobile {
+        width: calc(210px) !important;
+        margin-right: 4%;
+    }
+
+    .img {
+        height: 200px !important;
+    }
+
+    .tabMobile {
+        font-size: 10px !important;
+        width: 100%;
+
+    }
+
+    .site-layout {
+        margin: 120px 0 !important;
+    }
+
+    .itemCard {
+        margin: 0 !important;
+    }
+}
+
+@media only screen and (min-width: 769px) {}
