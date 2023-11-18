@@ -115,7 +115,7 @@ const HeaderComponent = () => {
                 zIndex: 1,
                 width: '100%',
                 height: '80px',
-                paddingTop: "1%"
+                paddingTop: "1%",
             }}
         >
             <Row gutter={17} justify="space-between" align="middle" style={{ width: '100%', padding: '0 20px' }}>
