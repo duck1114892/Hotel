@@ -24,6 +24,10 @@
     .headerMobile {
         padding-top: 4% !important;
     }
+
+    .login {
+        font-size: 12px !important
+    }
 }
 
 @media only screen and (min-width: 769px) {}

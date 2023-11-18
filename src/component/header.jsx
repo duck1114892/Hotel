@@ -142,7 +142,7 @@ const HeaderComponent = () => {
                     {isAdmin.isAuth ? (
                         <AvataComponent />
                     ) : (
-                        <Link style={{ textDecoration: 'none', color: 'black', fontSize: '20px' }} to={'/login'}>
+                        <Link className="login" style={{ textDecoration: 'none', color: 'black', fontSize: '20px' }} to={'/login'}>
                             Đăng Nhập
                         </Link>
                     )}
