@@ -15,7 +15,7 @@ const CreateUser = (props) => {
         const { email, fullName, password, phone } = values
 
         const res = await createUser(fullName, password, email, phone)
-        console.log(res)
+
         if (res.statusCode === 201) {
             message.success('Tạo Mới Thành Công')
             props.myFnc()
@@ -26,7 +26,7 @@ const CreateUser = (props) => {
         }
     };
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+
     };
     return (
         <>

@@ -29,9 +29,9 @@ const UpdateBookModal = (props) => {
     const onFinish = async (values) => {
         const id = props.props._id
         const { author, category, mainText, price, quantity, sold } = values
-        console.log('check value:', values)
+
         const res = await updateBook(id, author, category, mainText, price, quantity, sold, dataThumbnail[0].name, slider)
-        console.log('check resss', res)
+
         if (res.statusCode === 200) {
 
             setDataSlider([])
@@ -40,10 +40,10 @@ const UpdateBookModal = (props) => {
             setIsModalOpen(false)
             props.myFnc()
         }
-        console.log('Success:', values);
+
     };
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+
     };
     const getBase64 = (img, callback) => {
         const reader = new FileReader();
@@ -52,7 +52,7 @@ const UpdateBookModal = (props) => {
     };
 
     const beforeUpload = (file) => {
-        console.log(file)
+
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
             message.error('You can only upload JPG/PNG file!');
@@ -80,7 +80,7 @@ const UpdateBookModal = (props) => {
 
     const handleUploadFileThumbnail = async ({ file, onSuccess, onError }) => {
         const res = await callUploadBookImg(file)
-        console.log('this is thumnail api')
+
         if (res.statusCode === 201) {
             setDataThumbnail([{
                 name: res.data.fileUploaded,
@@ -94,7 +94,7 @@ const UpdateBookModal = (props) => {
 
     const handleUploadFileSlider = async ({ file, onSuccess, onError }) => {
         const res = await callUploadBookImg(file);
-        console.log('this is thumnail ', res)
+
         if (res.statusCode === 201) {
             setDataSlider((dataSlider) => [...dataSlider, {
                 name: res.data.fileUploaded,
@@ -103,7 +103,7 @@ const UpdateBookModal = (props) => {
             onSuccess('ok')
         } else {
             onError('Đã có lỗi khi upload file');
-            console.log('err')
+
         }
     };
 

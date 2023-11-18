@@ -33,7 +33,7 @@ const SignUpPage = () => {
             setLoading(false)
         }, 500)
         setLoading(true)
-        console.log('Failed:', errorInfo);
+
     };
     return (
         <Layout style={{ minHeight: '100vh' }} >

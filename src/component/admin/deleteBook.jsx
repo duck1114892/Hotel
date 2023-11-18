@@ -4,7 +4,7 @@ import { deleteBook, deleteUser } from '../../service/api';
 const DeleteBook = (props) => {
     const confirm = async () => {
         const res = await deleteBook(props.props._id)
-        console.log(res)
+
         if (res.statusCode === 200) {
             message.success('Xóa Thành Công');
             props.myFnc()
@@ -12,7 +12,7 @@ const DeleteBook = (props) => {
 
     };
     const cancel = (e) => {
-        console.log(e);
+
         message.error('Click on No');
     };
     return (<>  <Popconfirm

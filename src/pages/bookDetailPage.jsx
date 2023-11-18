@@ -43,7 +43,7 @@ const BookDetailPage = () => {
                         name: data.mainText
                     }
                 }
-                console.log("this is remain>>>", data.quantity)
+
                 message.success('Đã Thêm Vào Giỏ Hàng')
                 dispatch(isAddCart(cart))
 
@@ -98,7 +98,7 @@ const BookDetailPage = () => {
         const formattedNumber = number.toLocaleString('vi-VN');
         setVnd(formattedNumber)
     };
-    console.log(data.quantity)
+
     return (
         <>
             {/* `${import.meta.env.VITE_BE_URL}/images/book/${data.thumbnail}` */}

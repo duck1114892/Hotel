@@ -15,7 +15,7 @@ const HeaderComponent = () => {
     const isAdmin = useSelector(state => state.loginReducer)
     const cartData = useSelector(state => state.addCartReducer)
     const useNagi = useNavigate()
-    console.log(cartData)
+
     const logoutApi = async () => {
         await logout()
         useNagi('/')
@@ -83,7 +83,7 @@ const HeaderComponent = () => {
         </div>
     )
     const searchHandler = (e) => {
-        console.log(e.target.value)
+
         setSearch(e.target.value)
     }
     useEffect(() => {

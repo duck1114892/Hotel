@@ -46,7 +46,7 @@ const TableUser = () => {
     ];
 
     const onChange = (pagination, filters, sorter, extra) => {
-        console.log('params', pagination, filters, sorter, extra);
+
     };
     useEffect(() => {
         const getUserApi = async () => {
@@ -55,7 +55,7 @@ const TableUser = () => {
                 const res = await getAllUser()
                 const dataApi = res.data
                 let finalData
-                console.log('this is api', searchValue)
+
                 if (isSearch) {
                     const container = (element) => {
                         return element.email.includes(searchValue)
@@ -68,7 +68,7 @@ const TableUser = () => {
                 }
                 setData(finalData)
             } catch (error) {
-                console.log(error)
+
             }
             finally {
                 setLoading(false)

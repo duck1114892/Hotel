@@ -75,7 +75,7 @@ const TableBook = () => {
                 const res = await getBookManeger()
                 const dataApi = await res.data
 
-                console.log('this is api', searchValue)
+
                 if (isSearch) {
                     const container = (element) => {
                         return element.mainText.includes(searchValue)
@@ -88,9 +88,8 @@ const TableBook = () => {
                     finalData = dataApi
                 }
 
-                console.log(data)
             } catch (error) {
-                console.log(error)
+
             }
             finally {
                 setLoading(false)

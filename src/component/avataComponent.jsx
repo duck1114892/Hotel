@@ -7,7 +7,7 @@ import { logout } from "../service/api";
 
 const AvataComponent = ({ props }) => {
     const items = []
-    console.log(props)
+
     const isAdmin = useSelector(state => state.loginReducer)
 
     const logoutApi = async () => {

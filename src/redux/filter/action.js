@@ -11,7 +11,7 @@ export const isFilter = (data) => {
     }
 }
 export const isRange = (data) => {
-    console.log(data)
+
     return {
         type: 'RANGE',
         payload: data

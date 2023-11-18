@@ -47,7 +47,7 @@ const CreateBook = (props) => {
     };
 
     const beforeUpload = (file) => {
-        console.log(file)
+
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
             message.error('You can only upload JPG/PNG file!');
@@ -76,7 +76,7 @@ const CreateBook = (props) => {
 
     const handleUploadFileThumbnail = async ({ file, onSuccess, onError }) => {
         const res = await callUploadBookImg(file)
-        console.log('this is thumnail api')
+
         if (res.statusCode === 201) {
             setDataThumbnail([{
                 name: res.data.fileUploaded,
@@ -90,7 +90,7 @@ const CreateBook = (props) => {
 
     const handleUploadFileSlider = async ({ file, onSuccess, onError }) => {
         const res = await callUploadBookImg(file);
-        console.log('this is thumnail ', res)
+
         if (res.statusCode === 201) {
             setDataSlider((dataSlider) => [...dataSlider, {
                 name: res.data.fileUploaded,
@@ -100,7 +100,7 @@ const CreateBook = (props) => {
             onSuccess('ok')
         } else {
             onError('Đã có lỗi khi upload file');
-            console.log('err')
+
         }
     };
 

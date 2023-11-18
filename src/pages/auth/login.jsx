@@ -14,7 +14,7 @@ const LoginPage = () => {
     const useNagi = useNavigate()
     const onFinish = async (values) => {
         const data = await loginApi(values.username, values.password)
-        console.log(data)
+
         if (data.statusCode === 201) {
             message.success(`Xin Chào ${data.data.user.email}`)
             localStorage.setItem('access_token', data.data.access_token)
@@ -26,12 +26,12 @@ const LoginPage = () => {
         }
     };
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+
     };
     const emailState = useSelector(state => state.rootReducer.email)
     const passwordState = useSelector(state => state.rootReducer.password)
 
-    console.log('this is pass', emailValue, passwordValue)
+
     useEffect(() => {
         setEmailValue(emailState);
         setPasswordValue(passwordState);

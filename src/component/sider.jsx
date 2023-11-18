@@ -32,7 +32,7 @@ const SiderComponent = () => {
 
     const { token: { colorBgContainer } } = theme.useToken();
     const onFinish = (values) => {
-        console.log('Success:', values);
+
 
 
         if (values) {

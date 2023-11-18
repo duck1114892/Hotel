@@ -6,7 +6,7 @@ const UpdateModal = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [form] = Form.useForm()
     const showModal = () => {
-        console.log(props)
+
         setIsModalOpen(true);
     };
 
@@ -15,7 +15,7 @@ const UpdateModal = (props) => {
     };
     const onFinish = async (values) => {
         const id = props.props._id
-        console.log('this is id', id)
+
         const fullName = values.fullName
         const phone = values.phone
         const res = await editUser(id, fullName, phone)
@@ -24,10 +24,10 @@ const UpdateModal = (props) => {
             setIsModalOpen(false)
             props.myFnc()
         }
-        console.log('Success:', values);
+
     };
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+
     };
     useEffect(() => {
         form.setFieldsValue(props.props)

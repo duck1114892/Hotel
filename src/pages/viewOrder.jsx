@@ -13,12 +13,12 @@ const ViewOrder = () => {
         const getData = async () => {
             try {
                 const res = await callHistory()
-                console.log("check this res", res)
+
                 setData(res.data)
                 setLoading(true)
 
             } catch (error) {
-                console.log(error)
+
             }
             finally {
                 setLoading(false)
@@ -27,7 +27,7 @@ const ViewOrder = () => {
         }
         getData()
     }, [])
-    console.log(data)
+
     return (
         <>
             <div className="container" style={{ display: "block", height: "80vh", backgroundColor: "white" }}>
@@ -48,7 +48,7 @@ const ViewOrder = () => {
                         dataSource={data}
                         renderItem={(item) => (
                             <List.Item
-
+                                style={{ marginLeft: "10%" }}
                             >
                                 <List.Item.Meta
                                     title={(<>

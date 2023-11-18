@@ -8,7 +8,7 @@ export const registerApi = (username, email, phone, password) => {
     return axios.post('/api/v1/user/register', { fullName: username, email, phone, password })
 }
 export const getBookApi = (current, pageSize, sort, range, category) => {
-    console.log('check', current, pageSize)
+
 
     return axios.get(`/api/v1/book?current=${current}&pageSize=${pageSize}&category=${category}&sort=${sort}&${range}`,
     )
@@ -39,7 +39,7 @@ export const createUser = (fullName, password, email, phone) => {
     return axios.post('/api/v1/user', { fullName, password, email, phone })
 }
 export const updateBook = (id, author, category, mainText, price, quantity, sold, thumbnail, slider) => {
-    console.log("this is update api", id, author, category, mainText, price, quantity, sold, thumbnail, slider)
+
     return axios.put(`/api/v1/book/${id}`, { author, category, mainText, price, quantity, sold, thumbnail, slider })
 }
 export const createBook = (author, category, mainText, price, quantity, sold, thumbnail, slider) => {
@@ -55,7 +55,7 @@ export const logout = () => {
 export const callUploadBookImg = (fileImg) => {
 
     const bodyFormData = new FormData();
-    console.log(bodyFormData)
+
     bodyFormData.append('fileImg', fileImg);
     return axios({
         method: 'post',

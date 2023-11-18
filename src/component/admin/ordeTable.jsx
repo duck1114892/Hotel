@@ -40,7 +40,7 @@ const TableOrder = () => {
     ];
 
     const onChange = (pagination, filters, sorter, extra) => {
-        console.log('params', pagination, filters, sorter, extra);
+
     };
     useEffect(() => {
         const getUserApi = async () => {
@@ -49,10 +49,10 @@ const TableOrder = () => {
                 const res = await callOrderLsit(page, pageSize)
                 setData(res.data.result)
                 setTotal(res.data.meta.total)
-                console.log('check this>>>', res)
+
 
             } catch (error) {
-                console.log(error)
+
             }
             finally {
                 setLoading(false)
