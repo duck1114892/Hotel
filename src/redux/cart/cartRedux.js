@@ -5,7 +5,6 @@ const initialState = {
 const addCartReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_CART':
-
             let carts = [...state.cart];
             const item = action.payload;
             let isExistIndex = carts.findIndex(c => c._id === item._id);
@@ -17,7 +16,6 @@ const addCartReducer = (state = initialState, action) => {
             return { cart: carts };
 
         case 'UPDATE_CART':
-
             let cartsU = [...state.cart];
             const itemU = action.payload;
             const update = cartsU.map((item) => {

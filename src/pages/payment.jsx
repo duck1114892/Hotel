@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { isAddCart, isDeleteCart, isUpdateCart } from '../redux/cart/action';
 import { useForm } from 'antd/es/form/Form';
-import { callOrder, getBookDetail } from '../service/api';
+import { callOrder, getBookDetail, getBookManeger } from '../service/api';
 import { ArrowLeftOutlined, CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea';
 import AvataComponent from '../component/avataComponent';
@@ -16,6 +16,7 @@ const PayPage = () => {
     const [quantity, setQuantity] = useState()
     const dispatch = useDispatch();
     const [form] = Form.useForm()
+    const [book, setBook] = useState()
     const [remain, setRemain] = useState()
     const onChange = async (value, itemId, remain) => {
         const dataApi = await getBookDetail(itemId);
@@ -49,12 +50,22 @@ const PayPage = () => {
         message.success('Đã Xóa Đơn Hàng')
     }
     useEffect(() => {
-        setRemain(cartData.cart.remain)
         const totalValue = cartData.cart.reduce((accumulator, currentItem) => {
             return accumulator + currentItem.quantity * currentItem.price;
         }, 0);
         setTotal(totalValue)
-    })
+        const fetchBookData = async () => {
+            try {
+                const response = await getBookManeger();
+                setBook(response.data || []);
+            } catch (error) {
+                console.error('Error fetching book data:', error);
+                setBook([]); // Set book to an empty array or handle the error appropriately
+            }
+        };
+
+        fetchBookData();
+    }, [])
     const [current, setCurrent] = useState(0);
     const next = () => {
         setCurrent(current + 1);
@@ -86,6 +97,21 @@ const PayPage = () => {
         } else {
             message.error(res.message)
         }
+
+
+    }
+
+    const handleQuantity = (id) => {
+        try {
+            const res = book.find((item) => {
+                return item._id === id;
+            });
+            const quantity = res ? res.quantity : 0;
+            return quantity;
+        } catch {
+
+        }
+
     }
 
 
@@ -168,7 +194,7 @@ const PayPage = () => {
                                                             <InputNumber
                                                                 name="quantity"
                                                                 min={0}
-                                                                max={remain}
+                                                                max={handleQuantity(item._id)}
                                                                 onChange={(value) => onChange(value, item._id)}
                                                             />
                                                         </Form.Item>

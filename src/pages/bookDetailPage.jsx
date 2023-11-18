@@ -19,10 +19,11 @@ const BookDetailPage = () => {
     const [vnd, setVnd] = useState()
     const [form] = Form.useForm();
     const [fileList, setFileList] = useState([]);
+    const [quantity, setQuantity] = useState(0)
     const { id } = useParams()
     const dispatch = useDispatch()
     const isLogin = useSelector(state => state.loginReducer.isAuth)
-
+    const quantityInCart = useSelector(state => state.addCartReducer.cart)
     const images = fileList.map((item) => {
         return {
             original: item.url,
@@ -43,9 +44,9 @@ const BookDetailPage = () => {
                         name: data.mainText
                     }
                 }
-
                 message.success('Đã Thêm Vào Giỏ Hàng')
                 dispatch(isAddCart(cart))
+                form.resetFields()
 
             }
             else {
@@ -82,6 +83,13 @@ const BookDetailPage = () => {
                     : [];
 
                 setFileList([thumbnail, ...sliderImages]);
+                const res = quantityInCart.find((item) => {
+                    return item._id === data._id
+                })
+                if (res) {
+                    setQuantity(res.quantity)
+                    console.log(quantity)
+                }
             } catch (e) {
                 console.error(e);
             } finally {
@@ -90,7 +98,7 @@ const BookDetailPage = () => {
         };
 
         getBookDetailApi();
-    }, [id]);
+    }, [id, quantityInCart]);
 
     const onChange = (value) => {
         setPrice(data.price * value)
@@ -123,10 +131,10 @@ const BookDetailPage = () => {
                                     onFinish={onFinish}
                                 >
                                     <div className="item" style={{ marginTop: "8%" }} > Số Lượng : <Form.Item initialValue={1}
-                                        name="quanity"><InputNumber name="quantity" min={1} max={data.quantity} onChange={onChange} /></Form.Item></div>
+                                        name="quanity"><InputNumber name="quantity" min={1} max={data.quantity - quantity} onChange={onChange} /></Form.Item></div>
 
                                     <div className="btn" style={{ marginTop: "20%", width: "100%" }}>
-                                        <Button onClick={() => { form.submit() }} danger size='large' type="primary" style={{ textAlign: 'center', width: "100%", height: "7ch" }} ><ShoppingCartOutlined style={{ fontSize: "25px" }} /></Button></div>
+                                        <Button disabled={(quantity >= data.quantity) ? true : false} onClick={() => { form.submit() }} danger size='large' type="primary" style={{ textAlign: 'center', width: "100%", height: "7ch" }} ><ShoppingCartOutlined style={{ fontSize: "25px" }} /></Button></div>
                                 </Form>
                             </div>
                         </div>
