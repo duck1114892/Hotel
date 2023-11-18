@@ -4,7 +4,7 @@ import { Button, Col, List, Row, Typography } from "antd"
 import { Link } from "react-router-dom"
 import { ArrowLeftOutlined } from "@ant-design/icons"
 import AvataComponent from "../component/avataComponent"
-
+import '../../public/scss/viewOrder.css'
 const ViewOrder = () => {
     const [data, setData] = useState()
     const [loading, setLoading] = useState(false)
@@ -31,14 +31,14 @@ const ViewOrder = () => {
     return (
         <>
             <div className="container" style={{ display: "block", height: "80vh", backgroundColor: "white" }}>
-                <div className="headers" style={{ display: "flex", justifyContent: "space-around", marginTop: "2%", height: "1vh", backgroundColor: "white" }} >
-                    <Link to="/"><Button style={{
+                <div className="headers" style={{ width: "100%", display: "flex", justifyContent: "space-around", marginTop: "2%", height: "1vh", backgroundColor: "white" }} >
+                    <Link to="/"><Button className="backBtn" style={{
                         position: "absolute",
                         left: '100px',
                         fontSize: '20px',
                         height: '45px'
                     }}><ArrowLeftOutlined ></ArrowLeftOutlined></Button></Link>
-                    <div style={{ fontSize: "40px" }}>History</div>
+                    <div className="text" style={{ fontSize: "40px" }}>History</div>
                     <AvataComponent props={true}></AvataComponent>
                 </div>
                 <div className="body" style={{ width: "100%", height: "60vh", display: "flex", justifyContent: "center" }}>
@@ -60,7 +60,7 @@ const ViewOrder = () => {
                                                 <a >{item.email}</a>
                                             </Col>
                                             <Col span={7}>
-                                                <a style={{ color: "red" }}>{item.totalPrice.toLocaleString('vn-VN', { style: 'currency', currency: 'VND' })}</a>
+                                                <a className="font_size" style={{ color: "red", marginLeft: "50%", fontSize: "10px" }}>{item.totalPrice.toLocaleString('vn-VN', { style: 'currency', currency: 'VND' })}</a>
                                             </Col>
                                         </Row>
 
