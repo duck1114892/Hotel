@@ -6,7 +6,7 @@ import { loginApi } from "../../service/api";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { store } from "../../redux/store";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
     const [emailValue, setEmailValue] = useState('')
@@ -124,7 +124,7 @@ const LoginPage = () => {
                     </Form.Item>
                 </Form>
             </Content>
-            <Footer style={{ color: 'black' }}>Bạn Chưa Có Tài Khoản ? <a href='sign-up' relative="path">Đăng Ký</a></Footer>
+            <Footer style={{ color: 'black' }}>Bạn Chưa Có Tài Khoản ? <Link to='/sign-up' relative="path">Đăng Ký</Link></Footer>
         </Layout>
     )
 }

@@ -5,7 +5,7 @@ import Search from "antd/es/input/Search"
 import { Header } from "antd/es/layout/layout"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { getBookManeger, logout } from "../service/api"
 import '../../public/scss/search.css'
 import AvataComponent from "./avataComponent"
@@ -14,12 +14,11 @@ const HeaderComponent = () => {
     const [dataSearch, setDataSearch] = useState([])
     const isAdmin = useSelector(state => state.loginReducer)
     const cartData = useSelector(state => state.addCartReducer)
-
+    const useNagi = useNavigate()
     console.log(cartData)
     const logoutApi = async () => {
-        const res = await logout()
-        console.log(res)
-        window.location.reload()
+        await logout()
+        useNagi('/')
         localStorage.clear()
     }
     const items = []
