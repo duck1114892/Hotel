@@ -60,7 +60,7 @@ const ViewOrder = () => {
                                                 <a >{item.email}</a>
                                             </Col>
                                             <Col span={7}>
-                                                <a className="font_size" style={{ color: "red", marginLeft: "50%", fontSize: "10px" }}>{item.totalPrice.toLocaleString('vn-VN', { style: 'currency', currency: 'VND' })}</a>
+                                                <a className="font-size" style={{ color: "red" }}>{item.totalPrice.toLocaleString('vn-VN', { style: 'currency', currency: 'VND' })}</a>
                                             </Col>
                                         </Row>
 

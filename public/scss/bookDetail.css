@@ -49,7 +49,7 @@
 }
 
 .image-gallery-content .image-gallery-slide .image-gallery-image {
-    max-height: calc(70vh - 80px);
+    max-height: calc(60vh - 80px) !important;
 }
 
 @media only screen and (max-width: 768px) {
