@@ -1,0 +1,11 @@
+@media only screen and (max-width: 768px) {
+    .adminPage {
+        display: none;
+    }
+
+    .error {
+        display: flex !important;
+
+
+    }
+}

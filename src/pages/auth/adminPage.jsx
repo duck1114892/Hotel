@@ -11,6 +11,7 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import TableUser from '../../component/admin/tableUser';
 import { useSelector } from 'react-redux';
 import HeaderComponent from '../../component/header';
+import '../../../public/scss/adminMobile.css'
 import HeaderComponentAdmin from '../../component/admin/headerAdmin';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
@@ -48,47 +49,50 @@ const AdminPage = () => {
 
 
     return (
-        <Layout
-            style={{
-                minHeight: '100vh',
-            }}
-        >
-            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-                <div className="demo-logo-vertical" />
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-            </Sider>
-            <Layout>
-                <HeaderComponentAdmin
-                    style={{
-                        padding: 0,
-                        background: colorBgContainer,
-                    }}
-                />
-                <Content
-                    style={{
-                        margin: '0 16px',
-                    }}
-                >
-
-                    <div
+        <>
+            <div className='error' style={{ display: 'none' }}>Giao diện chưa hỗ trợ trên mobile</div>
+            <Layout
+                className='adminPage'
+                style={{
+                    minHeight: '100vh',
+                }}
+            >
+                <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+                    <div className="demo-logo-vertical" />
+                    <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+                </Sider>
+                <Layout>
+                    <HeaderComponentAdmin
                         style={{
-                            padding: 24,
-                            minHeight: 360,
+                            padding: 0,
                             background: colorBgContainer,
                         }}
+                    />
+                    <Content
+                        style={{
+                            margin: '0 16px',
+                        }}
                     >
-                        <Outlet></Outlet>
-                    </div>
-                </Content>
-                <Footer
-                    style={{
-                        textAlign: 'center',
-                    }}
-                >
-                    Ant Design ©2023 Created by Ant UED
-                </Footer>
+
+                        <div
+                            style={{
+                                padding: 24,
+                                minHeight: 360,
+                                background: colorBgContainer,
+                            }}
+                        >
+                            <Outlet></Outlet>
+                        </div>
+                    </Content>
+                    <Footer
+                        style={{
+                            textAlign: 'center',
+                        }}
+                    >
+                    </Footer>
+                </Layout>
             </Layout>
-        </Layout>
+        </>
     );
 };
 export default AdminPage;
