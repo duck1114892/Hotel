@@ -94,7 +94,8 @@ const BookPage = () => {
                                     hoverable
                                     style={{
                                         width: "calc(290px)",
-                                        margin: "2%"
+                                        margin: "2%",
+
 
                                     }}
                                     cover={

@@ -1,7 +1,7 @@
 @media only screen and (max-width: 768px) {
     .cardMobile {
         width: calc(190px) !important;
-
+        height: 320px !important;
     }
 
     .img {
