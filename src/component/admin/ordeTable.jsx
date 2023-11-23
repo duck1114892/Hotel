@@ -33,6 +33,10 @@ const TableOrder = () => {
 
         },
         {
+            title: 'Phone',
+            dataIndex: 'phone',
+        },
+        {
             title: 'Detail',
             dataIndex: "detail",
             render: (detail) => (
