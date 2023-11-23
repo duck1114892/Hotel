@@ -101,7 +101,7 @@ const BookPage = () => {
                                     cover={
 
                                         <Image className="img" preview={false} style={{ height: '350px' }} src={`${import.meta.env.VITE_BE_URL}/images/book/${item.thumbnail}`} alt={item.mainText} />
-                                    } // Add an alt attribute
+                                    }
                                 >
                                     <Meta title={item.mainText} />
                                     <div
@@ -126,7 +126,7 @@ const BookPage = () => {
                         onChange={(page) => {
                             setPage(page);
                         }}
-                        total={total} // Use totalPages to calculate the total
+                        total={total}
                         pageSize={pageSize}
                     />
                 </>

@@ -12,17 +12,34 @@
     }
 
     .value {
-        width: 300px !important;
+        width: 250px !important;
     }
 
     .cartBtn {
         width: 40% !important;
-        font-size: 15px;
-        margin-left: 30% !important;
+        font-size: 10px;
     }
 
     .login {
         font-size: 12px !important
+    }
+
+    .imgHeader {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .cartHeader {
+        font-size: 11px !important;
+        overflow: auto !important;
+        text-overflow: ellipsis !important;
+        width: 48% !important;
+    }
+
+
+
+    .popupCart {
+        width: 200px !important;
     }
 }
 

@@ -71,19 +71,19 @@ const HeaderComponent = () => {
     );
 
     const contextCart = (
-        <div >
+        <div className="popupCart" style={{ width: "500px" }} >
             {cartData.cart.map((item, index) => {
                 return (<>
                     <Link style={{ color: 'black' }} to={``}>
                         <div className="value" style={{ display: 'flex', height: "60px", width: "500px", marginTop: "10px" }}>
-                            <img src={`${import.meta.env.VITE_BE_URL}/images/book/${item.detail.img}`} style={{ width: "50px", height: "50px", marginRight: "3%", }} alt="" />
-                            <div style={{ fontSize: "15px", overflow: "hidden", textOverflow: "ellipsis", }}>{item.detail.name} <div style={{ fontSize: "10px" }}>Số Lượng: {item.quantity}</div> </div>
+                            <img className="imgHeader" src={`${import.meta.env.VITE_BE_URL}/images/book/${item.detail.img}`} style={{ width: "50px", height: "50px", marginRight: "3%", }} alt="" />
+                            <div className="cartHeader" style={{ width: "100%", fontSize: "15px", overflow: "hidden", textOverflow: "ellipsis", }}>{item.detail.name} <div style={{ fontSize: "10px" }}>Số Lượng: {item.quantity}</div> </div>
                         </div></Link>
                 </>
 
                 )
             })}
-            {cartData.cart.length === 0 ? <div>Giỏ Hàng Trống</div> : <Link to={'/payment'}><Button className="cartBtn" style={{ marginTop: "4%", marginLeft: "75%" }} danger><div>Đến Giỏ Hàng</div></Button></Link>}
+            {cartData.cart.length === 0 ? <div>Giỏ Hàng Trống</div> : <Link to={'/payment'}><Button className="cartBtn" danger><div className="textBtnHeader">Đến Giỏ Hàng</div></Button></Link>}
         </div>
     )
     const searchHandler = (e) => {
