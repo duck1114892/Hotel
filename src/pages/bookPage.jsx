@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Image, Pagination, Spin, Tabs } from "antd";
+import { Button, Card, Col, Image, Pagination, Row, Spin, Tabs } from "antd";
 import Meta from "antd/es/card/Meta";
 import { Content } from "antd/es/layout/layout";
 import { Link, useLocation } from "react-router-dom";
@@ -85,40 +85,54 @@ const BookPage = () => {
             }}
         ><Tabs className="tabMobile" style={{ marginLeft: '1%' }} defaultActiveKey="-sold" items={items} onChange={onChange} />
             {loading ? (<Spin><></></Spin>) :
-                <> <div style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>
-                    {book.map((item, index) => (
-                        <div className="itemCard" key={item._id} style={{ flex: "0 0 calc(5% - 10px)", margin: "1px" }}>
-                            <Link to={`/book-detail/${item._id}`}>
-                                <Card
-                                    className="cardMobile"
-                                    hoverable
-                                    style={{
-                                        width: "calc(290px)",
-                                        margin: "2%",
+                <> <div >
+                    <Row gutter={{
+                        xs: 8,
+                        sm: 16,
+                        md: 24,
+                        lg: 32,
+                    }}>
+                        {book.map((item, index) => (
+                            <Col span={{
+                                xs: 8,
+                                sm: 16,
+                                md: 24,
+                                lg: 32,
+                            }} >
 
-
-                                    }}
-                                    cover={
-
-                                        <Image className="img" preview={false} style={{ height: '350px' }} src={`${import.meta.env.VITE_BE_URL}/images/book/${item.thumbnail}`} alt={item.mainText} />
-                                    }
-                                >
-                                    <Meta title={item.mainText} />
-                                    <div
+                                <Link to={`/book-detail/${item._id}`}>
+                                    <Card
+                                        className="cardMobile"
+                                        hoverable
                                         style={{
-                                            width: "100%",
-                                            textOverflow: "ellipsis",
-                                            overflow: "hidden",
-                                            whiteSpace: "nowrap",
+                                            width: "calc(290px)",
+                                            margin: "2%",
+
+
                                         }}
+                                        cover={
+
+                                            <Image className="img" preview={false} style={{ height: '350px' }} src={`${import.meta.env.VITE_BE_URL}/images/book/${item.thumbnail}`} alt={item.mainText} />
+                                        }
                                     >
-                                        {item.author}
-                                    </div>
-                                    <div style={{ fontWeight: 600 }}>{price[index]} VND</div>
-                                </Card>
-                            </Link>
-                        </div>
-                    ))}
+                                        <Meta title={item.mainText} />
+                                        <div
+                                            style={{
+                                                width: "100%",
+                                                textOverflow: "ellipsis",
+                                                overflow: "hidden",
+                                                whiteSpace: "nowrap",
+                                            }}
+                                        >
+                                            {item.author}
+                                        </div>
+                                        <div style={{ fontWeight: 600 }}>{price[index]} VND</div>
+                                    </Card>
+                                </Link>
+
+                            </Col>
+                        ))}
+                    </Row>
                 </div>
                     <Pagination
                         style={{ width: "100%" }}
