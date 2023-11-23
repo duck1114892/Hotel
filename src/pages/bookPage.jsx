@@ -79,7 +79,7 @@ const BookPage = () => {
         <Content
             className="site-layout"
             style={{
-
+                marginTop: "5%",
                 width: "100%",
                 height: "100%",
             }}

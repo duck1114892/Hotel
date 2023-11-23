@@ -122,6 +122,7 @@ const HeaderComponent = () => {
                 paddingTop: "1%",
                 justifyContent: "space-around",
                 alignItems: "center"
+
             }}
         >
 
