@@ -67,7 +67,7 @@ const ViewOrder = () => {
     };
     return (
         <>
-            <Layout style={{ height: "100vh" }}>
+            <Layout style={{ height: "100vh", width: "100vw" }}>
                 <Header style={{ height: "7vh", width: "100%", backgroundColor: "white" }}>
                     <Row style={{ display: 'flex', justifyContent: "center", width: "100%", textAlign: "center" }}>
                         <Col span={8}> <Link to="/"><Button className="backBtn" style={{
