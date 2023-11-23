@@ -33,8 +33,26 @@ const TableOrder = () => {
 
         },
         {
+            title: 'Detail',
+            dataIndex: "detail",
+            render: (detail) => (
+                <>
+                    {detail.map((item) => (
+                        <div className="listItem" key={item._id}>
+                            {item.bookName} x {item.quantity}
+                        </div>
+                    ))}
+                </>
+            ),
+
+        },
+        {
             title: 'Total',
-            dataIndex: `totalPrice`
+            dataIndex: `totalPrice`,
+            render: (e) => {
+
+                return <span> {e.toLocaleString('vn-VN', { style: 'currency', currency: 'VND' })}</span>
+            }
         }
 
     ];

@@ -60,6 +60,10 @@ const ViewOrder = () => {
                 compare: (a, b) => a.totalPrice - b.totalPrice,
                 multiple: 1,
             },
+            render: (e) => {
+
+                return <span> {e.toLocaleString('vn-VN', { style: 'currency', currency: 'VND' })}</span>
+            }
         },
     ];
     const onChange = (pagination, filters, sorter, extra) => {
