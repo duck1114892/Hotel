@@ -80,7 +80,7 @@ const ViewOrder = () => {
                     </Row>
                 </Header>
                 <Content style={{}}>
-                    <Table columns={columns} dataSource={data} onChange={onChange} />
+                    <Table style={{ width: "100vw" }} columns={columns} dataSource={data} onChange={onChange} />
                 </Content>
 
             </Layout>
