@@ -12,7 +12,7 @@ const Dashboard = () => {
                 const res = await callDashboard()
                 setData(res.data)
             } catch (error) {
-
+                console.log(error)
             }
             finally {
                 setLoading(false)
