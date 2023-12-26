@@ -1,9 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../redux/counter/counterSlice';
-import rootReducer from './filter/filter';
 import loginReducer from './login/asscess';
-import searchAdminReducer from './sreach/filFrom';
-import addCartReducer from './cart/cartRedux';
 import {
   persistStore,
   persistReducer,
@@ -26,11 +22,7 @@ const persistConfig = {
 }
 
 const rootReducers = combineReducers({
-  counter: counterReducer,
-  rootReducer: rootReducer,
   loginReducer: loginReducer,
-  searchAdminReducer: searchAdminReducer,
-  addCartReducer: addCartReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducers)
@@ -48,11 +40,4 @@ const store = configureStore({
 let persistor = persistStore(store)
 
 export { store, persistor }
-// export const store = configureStore({
-//   reducer: {
-//     counter: counterReducer,
-//     rootReducer: rootReducer,
-//     loginReducer: loginReducer,
-//     searchAdminReducer: searchAdminReducer
-//   },
-// });
+
