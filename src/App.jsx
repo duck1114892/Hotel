@@ -21,24 +21,15 @@ import BookingDetail from './pages/user/outlet/bookingDetail';
 
 const App = () => {
   const dispatch = useDispatch();
-  const isLogin = useSelector(state => state.loginReducer.isAuth);
-
-
   useEffect(() => {
     const fetchData = async () => {
-      if (!isLogin && window.location.pathname !== '/login') {
-        window.location.replace('/login')
-        return null
-      }
       const refesht = await refesh();
+      console.log(refesht)
       if (refesht && refesht.data) {
         dispatch(isLogin(refesht.data));
       } else {
         throw new Error('Refresh failed: No data returned');
-
       }
-
-
     };
     fetchData();
   }, []);

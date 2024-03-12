@@ -13,6 +13,7 @@ export const refesh = () => {
 export const getUser = (current, pageSize, email) => {
     return axios.get(`/api/v1/users?current=${current}&pageSize=${pageSize}&email=${email}`)
 }
+
 export const getListUser = () => {
     return axios.get(`/api/v1/users`)
 }

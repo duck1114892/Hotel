@@ -12,7 +12,9 @@ const loginReducer = (state = initialState, action) => {
         case 'LOGIN':
             const getUser = action.payload
             return {
-                ...state, isAuth: true, user: {
+                ...state,
+                isAuth: true,
+                user: {
                     email: getUser.email,
                     name: getUser.name,
                     id: getUser._id,

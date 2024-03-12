@@ -22,6 +22,13 @@ const Home = () => {
     const [mostRatingHotel, setMostRatingHotel] = useState([])
     const [bestRoom, setBestRoom] = useState([])
     const [getHotellAddress, setHotelAddress] = useState([])
+    const isLogin = useSelector(state => state.loginReducer.isAuth);
+
+    // if (!isLogin && window.location.pathname !== '/login') {
+    //     window.location.replace('/login')
+    //     return null
+    // }
+
     const settings = {
         speed: 700,
         slidesToShow: bestRoom.length,

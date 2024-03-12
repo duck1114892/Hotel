@@ -38,11 +38,15 @@ instance.interceptors.response.use(
                 return instance.request(error.config)
             }
             else {
-                window.location.replace("http://localhost:3000/login")
+
             }
         }
 
         else {
+            console.log(error)
+            if (error.response.status === 401 && window.location.pathname !== '/login') {
+                window.location.replace('/login')
+            }
             message.error(error.response.data.message)
             return Promise.reject(error);
         }
