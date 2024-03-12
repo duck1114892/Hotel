@@ -4,28 +4,33 @@ import '../../styles/reset.css'
 import { loginApi } from "../../service/api";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import * as React from 'react';
 import instance from "../../utils/axios-customsize";
 const LoginPage = () => {
-
+    const nagivate = useNavigate()
     const onFinish = async (values) => {
         const data = await loginApi(values.username, values.password)
-
-        if (data.statusCode === 201) {
-            console.log(data)
-            message.success(`Xin Chào ${data.data.user.email}`)
-            localStorage.setItem('access_token', data.data.access_token)
-
+        try {
+            if (data.statusCode === 201) {
+                message.success(`Xin Chào ${data.data.user.email}`)
+                localStorage.setItem('access_token', data.data.access_token)
+                location.replace('/')
+            }
+            else {
+                message.error(data.message)
+            }
+        } catch (error) {
+            message.error("LỖi")
         }
-        else {
 
-        }
+
 
 
     };
     const onFinishFailed = (errorInfo) => {
 
     };
-    console.log(useSelector(state => state.loginReducer))
+
     return (
         <Layout style={{ minHeight: '100vh' }} >
             <Header style={{

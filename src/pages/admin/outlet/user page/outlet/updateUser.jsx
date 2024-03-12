@@ -8,7 +8,7 @@ const UpdateUserBtn = (prop) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     let [loading, setLoading] = useState(false)
     let [role, setRole] = useState([])
-    console.log(prop)
+
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -20,19 +20,20 @@ const UpdateUserBtn = (prop) => {
     };
 
     const onFinish = async (values) => {
-        console.log(values)
+
         setLoading(true)
         try {
             const createUserApi = await updateUser(prop.prop._id, {
-                name: values.username,
+                name: values.name,
                 age: values.age,
                 gender: values.gender,
                 address: values.address,
                 hotel: values.hotel
             })
 
-            if (createUserApi.statusCode === 201) {
+            if (createUserApi.statusCode === 200) {
                 message.success(createUserApi.message)
+                prop.delete()
             }
             else {
                 message.error(createUserApi.message)
@@ -167,21 +168,6 @@ const UpdateUserBtn = (prop) => {
                                 <Select options={exampleData.address}></Select>
 
                             </Form.Item></Col>
-                        <Col span={8}>
-                            <Form.Item
-                                label='Role'
-                                name="role"
-                                className="form-item"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Vui Lòng Nhập Role!',
-                                    },
-                                ]}
-                            >
-                                <Select options={role}></Select>
-
-                            </Form.Item></Col>
                     </Row>
 
                     <Form.Item
@@ -202,7 +188,7 @@ const UpdateUserBtn = (prop) => {
                         style={{ marginTop: '10px' }}
                     >
                         <Button className="btn" style={{ height: '40px', width: '100px' }} type="primary" htmlType="submit" loading={loading}>
-                            Đăng Ký
+                            Cập Nhật
                         </Button>
                     </Form.Item>
                 </Form>

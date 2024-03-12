@@ -1,20 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import SliderComopent from './component/slider';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate, useNavigation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import HeaderComponent from './component/header';
 const { Header, Content, Footer, Sider } = Layout;
-const items = [UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
-    (icon, index) => ({
-        key: String(index + 1),
-        icon: React.createElement(icon),
-        label: `nav ${index + 1}`,
-    }),
-);
+
 const AdminHomePage = () => {
-    const userState = useSelector(state => state.loginReducer.user.role)
-    console.log("check role", userState)
+    const userRole = useSelector(state => state.loginReducer)
+    const nagivate = useNavigate()
+    console.log(userRole)
+    if (userRole.user.role !== 'SUPER_ADMIN') {
+        nagivate('/')
+    }
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
@@ -22,12 +21,7 @@ const AdminHomePage = () => {
         <Layout style={{ height: '100vh' }}>
             <SliderComopent></SliderComopent>
             <Layout>
-                <Header
-                    style={{
-                        padding: 0,
-                        background: colorBgContainer,
-                    }}
-                />
+                <HeaderComponent></HeaderComponent>
                 <Content
                     style={{
                         margin: '24px 16px 0',

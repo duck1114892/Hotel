@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { Button, message, Popconfirm } from 'antd';
-import { deleteUser } from '../../../../../service/api';
+import { deleteHotel, deleteUser } from '../../../../../service/api';
 import { DeleteOutlined } from '@ant-design/icons';
-const DeleteUSerModel = (prop, isDelete) => {
+const DeleteHotel = (prop) => {
+
     const confirm = async (e) => {
         try {
-            const res = await deleteUser(prop.prop._id)
-            if (res && res.data) {
+            const res = await deleteHotel(prop.prop._id)
+            if (res.statusCode === 200) {
                 console.log(res)
                 message.success(res.message)
-                prop.delete()
+                prop.confirmUpdate()
             }
         } catch (error) {
 
@@ -18,7 +19,7 @@ const DeleteUSerModel = (prop, isDelete) => {
     return (
         <>
             <Popconfirm
-                description="Bạn có muốn xóa người dùng này"
+                description="Bạn có muốn xóa Hotel này"
                 onConfirm={confirm}
                 okText="Yes"
                 cancelText="No"
@@ -28,4 +29,4 @@ const DeleteUSerModel = (prop, isDelete) => {
         </>
     );
 }
-export default DeleteUSerModel
+export default DeleteHotel

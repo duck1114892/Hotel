@@ -593,6 +593,51 @@ let exampleData = {
             "value": 100,
             "label": "100"
         }
+    ],
+    status: [
+        {
+            "value": 'READY',
+            "label": "Còn Phòng"
+        },
+        {
+            "value": 'PENDING',
+            "label": "Đang Sử Lý"
+        },
+        {
+            "value": 'OUT_OFF',
+            "label": "Hết Phòng"
+        },
+    ],
+    price: [
+        {
+            "value": '<=1000000',
+            "label": "Dưới 1 Triệu"
+        },
+        {
+            "value": '>=1000000',
+            "label": "Trên 1 Triệu"
+        },
+    ],
+    star: [
+        {
+            "value": '1',
+            "label": "1 Sao"
+        },
+        {
+            "value": '2',
+            "label": "2 Sao"
+        },
+        {
+            "value": '3',
+            "label": "3 Sao"
+        },
+        {
+            "value": '4',
+            "label": "4 Sao"
+        }, {
+            "value": '5',
+            "label": "5 Sao"
+        },
     ]
 }
 export default exampleData

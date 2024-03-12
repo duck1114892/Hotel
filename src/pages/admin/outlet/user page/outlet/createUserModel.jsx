@@ -36,12 +36,13 @@ const CreateUserBtn = (prop) => {
                 prop.delete()
             }
             else {
-                message.success("Kiểm tra lại mật khẩu")
+                message.error(createUserApi.message)
             }
 
         } catch (error) {
             setLoading(false)
             console.log(error)
+            message.error(error.response.data.message)
         }
         finally {
             setLoading(false)

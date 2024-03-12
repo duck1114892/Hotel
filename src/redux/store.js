@@ -12,6 +12,11 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/integration/react'
+import upadloadReducer from './upload/asscess';
+import uploadReducer from './upload/asscess';
+import isUpdateReducer from './confim/confrimUpdate';
+import searchReducer from './search/asscess';
+import filterReducer from './filter/asscess';
 
 
 const persistConfig = {
@@ -23,6 +28,10 @@ const persistConfig = {
 
 const rootReducers = combineReducers({
   loginReducer: loginReducer,
+  uploadReducer: uploadReducer,
+  isUpdateReducer: isUpdateReducer,
+  searchReducer: searchReducer,
+  filterReducer: filterReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducers)

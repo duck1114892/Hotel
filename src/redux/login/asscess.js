@@ -11,7 +11,6 @@ const loginReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'LOGIN':
             const getUser = action.payload
-            console.log(getUser)
             return {
                 ...state, isAuth: true, user: {
                     email: getUser.email,
@@ -19,6 +18,17 @@ const loginReducer = (state = initialState, action) => {
                     id: getUser._id,
                     role: getUser.role.name,
                     permissions: getUser.permission
+                }
+            }
+        case 'LOGOUT':
+            return {
+                ...state,
+                isAuth: false,
+                user: {
+                    email: "",
+                    name: "",
+                    role: "",
+                    id: ""
                 }
             }
         default: return state

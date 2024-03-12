@@ -606,7 +606,6 @@ const SignUpPage = () => {
         }
     ]
     const onFinish = async (values) => {
-        console.log(values)
         setLoading(true)
         try {
             const siginUpApi = await signUpApi({
@@ -620,6 +619,7 @@ const SignUpPage = () => {
 
             if (siginUpApi.statusCode === 201) {
                 message.success(siginUpApi.message)
+                window.location.replace('/login')
             }
             else {
                 message.error(siginUpApi.message)

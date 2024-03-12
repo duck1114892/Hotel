@@ -14,8 +14,8 @@ const SliderComopent = () => {
     }
     let items = [
         getItem('Table User', '1', <Link to={'users'}><PieChartOutlined /></Link>),
-        getItem('Table Book', '2', <Link to={'book'}><PieChartOutlined /></Link>),
-        getItem('Table Order', '3', <Link to={'order'}><PieChartOutlined /></Link>),]
+        getItem('Table Hotel', '2', <Link to={'hotels'}><PieChartOutlined /></Link>),
+        getItem('Table Booking', '3', <Link to={'bookings'}><PieChartOutlined /></Link>),]
     return (
         <Sider
             breakpoint="lg"

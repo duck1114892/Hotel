@@ -1,9 +1,11 @@
-import { Pagination, Table } from "antd"
+import { Flex, Pagination, Table } from "antd"
 import { useEffect, useState } from "react";
 import { getUser } from "../../../../service/api";
 import CreateUserBtn from "./outlet/createUserModel";
 import UpdateUserBtn from "./outlet/updateUser";
 import DeleteUSerModel from "./outlet/deleteUserModel";
+import { useSelector } from "react-redux";
+
 
 const UserPage = () => {
     const [error, setError] = useState(null);
@@ -13,6 +15,7 @@ const UserPage = () => {
     const [pageSize, setPageSize] = useState(8);
     const [total, setTotal] = useState();
     const [isDelete, setDelete] = useState(false)
+
     const onShowSizeChange = (current) => {
         setCurrent(current)
     }
@@ -23,41 +26,47 @@ const UserPage = () => {
         {
             title: 'Name',
             dataIndex: 'name',
+            key: 'name'
         },
         {
             title: 'Email',
             dataIndex: 'email',
+            key: 'email'
 
         },
         {
             title: 'Gender',
             dataIndex: 'gender',
+            key: 'gender'
         },
         {
             title: 'Role',
             render: (record) => {
-                console.log("check record", record.role?.name ?? 'nul')
+
                 return <div>{record.role?.name ?? 'nul'}</div>
-            }
+            },
+            key: 'role'
         },
         {
             title: 'Address',
             dataIndex: 'address',
+            key: 'address'
         },
         {
             title: 'Action',
             render: (record) => {
-                return (<><UpdateUserBtn prop={record}></UpdateUserBtn><DeleteUSerModel prop={record} delete={confirmDelete}></DeleteUSerModel></>)
-            }
+                return (<div style={{ display: "flex", justifyContent: "space-between" }}><UpdateUserBtn prop={record} delete={confirmDelete}></UpdateUserBtn><DeleteUSerModel prop={record} delete={confirmDelete}></DeleteUSerModel></div>)
+            },
+            key: 'action'
         }
     ];
-
+    const findEmail = useSelector(state => state.searchReducer.keyValue)
     const getUserApi = async () => {
         setLoading(true);
         setError(null);
 
         try {
-            const getUsers = await getUser(current, pageSize);
+            const getUsers = await getUser(current, pageSize, findEmail);
 
             if (getUsers && getUsers.data) {
                 setData(getUsers.data.result);
@@ -94,7 +103,7 @@ const UserPage = () => {
         };
 
         fetchDataWithRetry();
-    }, [current, pageSize, isDelete]);
+    }, [current, pageSize, isDelete, findEmail]);
 
     return (
         <>
