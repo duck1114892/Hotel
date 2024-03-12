@@ -21,8 +21,6 @@ import BookingDetail from './pages/user/outlet/bookingDetail';
 
 const App = () => {
   const dispatch = useDispatch();
-
-
   useEffect(() => {
     const fetchData = async () => {
       const refesht = await refesh();
