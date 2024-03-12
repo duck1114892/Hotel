@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, useLocation, useNavigate } from 'react-router-dom';
 import LoginPage from './pages/auth/login';
 import { useDispatch, useSelector } from 'react-redux';
 import { isLogin } from './redux/login/action';
@@ -21,14 +21,23 @@ import BookingDetail from './pages/user/outlet/bookingDetail';
 
 const App = () => {
   const dispatch = useDispatch();
+  const isLogin = useSelector(state => state.loginReducer.isAuth);
+
+
   useEffect(() => {
     const fetchData = async () => {
+      if (!isLogin && window.location.pathname !== '/login') {
+        window.location.replace('/login')
+        return null
+      }
       const refesht = await refesh();
       if (refesht && refesht.data) {
         dispatch(isLogin(refesht.data));
       } else {
         throw new Error('Refresh failed: No data returned');
+
       }
+
 
     };
     fetchData();
