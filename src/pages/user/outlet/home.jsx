@@ -97,7 +97,7 @@ const Home = () => {
 
                                                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)"
                                             }}
-                                            cover={<img alt="example" src={`http://localhost:9900/images/default/${item.logo}`} />}
+                                            cover={<img alt="example" src={`${import.meta.env.VITE_BE_URL}/images/default/${item.logo}`} />}
                                         >
                                             <Meta title={`${item.name}`} description={<><EnvironmentOutlined />{item.address}</>} />
                                             <Rate disabled defaultValue={item.rating} />
