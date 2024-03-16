@@ -51,7 +51,7 @@ const HotelPage = () => {
             dataIndex: 'logo',
             key: "logo",
             render: (record) => {
-                return <Avatar src={`http://localhost:9900/images/default/${record}`}></Avatar>
+                return <Avatar src={`https://hotelbe.hotelduckgg.click/images/default/${record}`}></Avatar>
             }
         },
         {
