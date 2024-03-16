@@ -56,7 +56,7 @@ const CreatRoom = (prop) => {
             Create Room
         </Button>
         <Modal title={`Tạo Phòng Cho Hotel : ${prop.prop.name}`} open={isModalOpen} onOk={() => form.submit()} onCancel={handleCancel}>
-            <Avatar src={`http://localhost:9900/images/default/${prop.prop.logo}`} />
+            <Avatar src={`https://hotelbe.hotelduckgg.click/images/default/${prop.prop.logo}`} />
             <Form
                 name="basic"
                 labelCol={{
