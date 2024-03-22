@@ -74,8 +74,8 @@ const RoomAction = (prop) => {
                 setHotelRef(res.data.hotelId)
                 setImages(res?.data.slider.map((item) => {
                     return {
-                        original: `http://localhost:9900/images/default/${item}`,
-                        thumbnail: `http://localhost:9900/images/default/${item}`,
+                        original: `https://hotelbe.hotelduckgg.click/images/default/${item}`,
+                        thumbnail: `https://hotelbe.hotelduckgg.click/images/default/${item}`,
                     }
                 }))
                 setLoading(false)
