@@ -113,16 +113,17 @@ const HotelHome = () => {
                         extra={<Button type="primary" onClick={resetForm}>Tìm Lại</Button>}
                     />) : (<Row>
                         {mostRatingHotel.map((item) => {
+                            console.log(item?.rating)
                             return (
-                                <Col span={24} key={item.id} style={{ marginTop: "30px", backgroundColor: "white", borderRadius: "10px", display: "flex", margin: "10px auto" }}>
-                                    <img style={{ width: "200px", borderRadius: "10px" }} alt="example" src={`${import.meta.env.VITE_BE_URL}/images/default/${item.logo}`} />
+                                <Col span={24} key={item._id} style={{ marginTop: "30px", backgroundColor: "white", borderRadius: "10px", display: "flex", margin: "10px auto" }}>
+                                    <img style={{ width: "200px", borderRadius: "10px" }} alt="example" src={`${import.meta.env.VITE_BE_URL}/images/default/${item?.logo}`} />
                                     <div style={{ marginLeft: "2%", width: "50%" }}>
-                                        <h2 style={{ marginTop: "30px" }}>{item.name}</h2>
+                                        <h2 style={{ marginTop: "30px" }}>{item?.name}</h2>
                                         <div style={{ fontWeight: "700", color: "gray", marginTop: "20px" }}><EnvironmentOutlined />{item.address}</div>
-                                        <div style={{ marginTop: "20px", color: "gray" }}>Số Lượng Phòng : {item.roomId.length}</div>
-                                        <Rate style={{ marginTop: "20px" }} disabled defaultValue={item.rating}></Rate>
+                                        <div style={{ marginTop: "20px", color: "gray" }}>Số Lượng Phòng : {item?.roomId?.length}</div>
+                                        <Rate style={{ marginTop: "20px" }} disabled defaultValue={item?.rating}></Rate>
                                     </div>
-                                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Link to={`/hotelDetail/${item._id}`}><Button danger type="primary"><EyeOutlined />Xem Thêm</Button></Link></div>
+                                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Link to={`/hotelDetail/${item?._id}`}><Button danger type="primary"><EyeOutlined />Xem Thêm</Button></Link></div>
                                 </Col>
                             )
                         })}

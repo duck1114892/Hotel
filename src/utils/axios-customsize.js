@@ -38,7 +38,6 @@ instance.interceptors.response.use(
                 return instance.request(error.config)
             }
             else {
-
             }
         }
 

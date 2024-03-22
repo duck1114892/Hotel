@@ -143,3 +143,12 @@ export const creatRatingApi = (hotelId, rating, comment) => {
 export const getRatingApi = (id) => {
     return axios.get(`/api/v1/rating/${id}`)
 }
+export const sendMailBooking = (name, email, roomName, img, checkIn, checkOut) => {
+    return axios.post('/api/v1/mail', { name, email, roomName, img: `${import.meta.env.VITE_BE_URL}/images/default/${img}`, checkIn, checkOut })
+}
+export const CheckMail = (mail) => {
+    return axios.post('/api/v1/auth/checkMail', { email: mail })
+}
+export const verifyMailApi = (email) => {
+    return axios.post(`/api/v1/mail/verifyMail`, { email: email, link: `${import.meta.env.VITE_FE_URL}/signUp/${email}` })
+}

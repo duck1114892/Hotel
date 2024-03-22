@@ -1,15 +1,17 @@
-import { Button, Checkbox, Col, Form, Input, Layout, Row, Select, message } from "antd"
+import { Button, Checkbox, Col, Form, Input, Layout, Row, Select, Steps, message } from "antd"
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import '../../styles/reset.css'
 import '/public/scss/login.css'
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signUpApi } from "../../service/api";
+import { MailOutlined, UserOutlined } from "@ant-design/icons";
 
 const SignUpPage = () => {
     let [loading, setLoading] = useState(false)
     let navigate = useNavigate()
+
     let address = [
         {
             "value": "An Giang",
@@ -605,12 +607,26 @@ const SignUpPage = () => {
             "label": "100"
         }
     ]
+    const items = [
+        {
+            title: 'Tên Và Email',
+            content: 'First-content',
+            icon: <UserOutlined></UserOutlined>
+        },
+        {
+            title: 'Xác Thực Tài Khoản',
+            content: 'Second-content',
+            icon: <MailOutlined></MailOutlined>
+        }
+    ];
+    console.log(window.location.pathname)
+    const [current, setCurrent] = useState(0);
     const onFinish = async (values) => {
         setLoading(true)
         try {
             const siginUpApi = await signUpApi({
                 name: values.username,
-                email: values.email,
+                email: email,
                 password: values.password,
                 age: values.age,
                 gender: values.gender,
@@ -648,8 +664,9 @@ const SignUpPage = () => {
                 color: "Blacks",
                 backgroundColor: 'white',
                 textAlign: 'center',
-                fontSize: "30px"
-            }}>Đăng Ký</Header>
+                fontSize: "30px",
+                paddingTop: "10px"
+            }}> Đăng Ký</Header>
             <Content
                 style={{
                     display: 'flex',

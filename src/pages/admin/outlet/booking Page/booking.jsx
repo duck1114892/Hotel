@@ -1,6 +1,6 @@
 import { DatePicker, Table, TimePicker, Spin, Pagination, message, Tag, Button } from "antd";
 import { useEffect, useState } from "react";
-import { getBooking, updateBooking } from "../../../../service/api";
+import { getBooking, sendMailBooking, updateBooking } from "../../../../service/api";
 import moment from "moment";
 import CreatBooking from "./oulet/creatBooking";
 import UpdateBooking from "./oulet/updateBooking";
@@ -39,10 +39,14 @@ const BookingPage = () => {
         const newDateTime = moment(selectedDateTime.format('YYYY-MM-DD') + ' ' + timeString);
         setSelectedCheckOutDateTime(newDateTime);
     };
-    const handleCheck = async (id) => {
+    const handleCheck = async (id, name, email, roomName, img, checkIn, checkOut) => {
         const res = await updateBooking(id, { status: "OK" })
         if (res) {
             setUpdate(!update)
+            const res = await sendMailBooking(name, email, roomName, img, checkIn, checkOut)
+            if (res.statusCode === 201) {
+                message.success(`Đã Gửi Mail tới ${email}`)
+            }
         }
     }
     const columns = [
@@ -102,14 +106,17 @@ const BookingPage = () => {
         {
             title: 'Status',
             key: 'status',
-            render: (record) => (
-                <div style={{ display: "flex" }}>
-                    {record?.status === 'PENDING' ? (<>
-                        <Button onClick={() => handleCheck(record?._id)} type="primary" >Duyệt</Button>
-                    </>) : (<>  <Tag color="success" >{record?.status}</Tag></>)}
+            render: (record) => {
+                console.log('>>>>>>>>>', record)
+                return (
+                    <div style={{ display: "flex" }}>
+                        {record?.status === 'PENDING' ? (<>
+                            <Button onClick={() => handleCheck(record?._id, record?.userId?.name, record?.userId.email, record?.roomId?.name, record?.roomId?.img, record?.checkInDate, record?.checkOutDate)} type="primary" >Duyệt</Button>
+                        </>) : (<>  <Tag color="success" >{record?.status}</Tag></>)}
 
-                </div>
-            ),
+                    </div>
+                )
+            }
         },
         {
             title: 'Action',

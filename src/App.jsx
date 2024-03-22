@@ -11,13 +11,13 @@ import HotelPage from './pages/admin/outlet/hotel Page/hotel';
 import BookingPage from './pages/admin/outlet/booking Page/booking';
 import { message } from 'antd';
 import HomePage from './pages/user/homePage';
-
 import RoomDetail from './pages/user/outlet/roomDetail';
 import Home from './pages/user/outlet/home';
 import HotelHome from './pages/user/outlet/hotelHome';
 import RoomHome from './pages/user/outlet/roomHome';
 import HotelDetail from './pages/user/outlet/hotelDetail';
 import BookingDetail from './pages/user/outlet/bookingDetail';
+import VerifyMail from './pages/auth/verifyMail';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -43,6 +43,7 @@ const App = () => {
       path: '/signUp',
       element: <SignUpPage />,
     },
+
     {
       path: '/adminPage',
       element: <AdminHomePage />,

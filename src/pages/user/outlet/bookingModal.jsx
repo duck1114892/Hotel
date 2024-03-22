@@ -9,26 +9,21 @@ import { useSelector } from 'react-redux';
 const BookingModal = (prop) => {
     const getId = useSelector(state => state.loginReducer.user.id);
     const get = useSelector(state => state.loginReducer);
-    console.log(">>>>>>>lmao:", get)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [email, setEmail] = useState([]);
     const [room, setRoom] = useState([]);
     const [total, setTotal] = useState();
     const [isQuantity, setQuantity] = useState(1);
     const [maxRoom, setMaxRoom] = useState(1);
-    const [finalPrice, setFinalPrice] = useState();
+    const [finalPrice, setFinalPrice] = useState(0);
     const [form] = useForm();
     const showModal = () => {
         setIsModalOpen(true);
     };
-
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-
     const handleCancel = () => {
         setIsModalOpen(false);
         form.resetFields();
+        setFinalPrice(0)
     };
 
     const handleQuantity = (value) => {
@@ -106,9 +101,8 @@ const BookingModal = (prop) => {
                         ]}
                     >
                         <DatePicker disabledDate={(current) => {
-                            // Chỉ cho phép chọn ngày từ ngày hiện tại trở đi
                             return current && current < moment().startOf('day');
-                        }} style={{ width: "100%" }} placeholder='Ngày Check In' showTime format="YYYY-MM-DD HH:mm" onChange={() => { calculateTotal(form.getFieldValue('quantity'), prop.prop.price) }} />
+                        }} style={{ width: "100%" }} placeholder='Ngày Check In' format="YYYY-MM-DD HH:mm" onChange={() => { calculateTotal(form.getFieldValue('quantity'), prop.prop.price) }} />
                     </Form.Item>
                     <Form.Item
 
@@ -121,9 +115,8 @@ const BookingModal = (prop) => {
                         ]}
                     >
                         <DatePicker disabledDate={(current) => {
-                            // Chỉ cho phép chọn ngày từ ngày hiện tại trở đi
-                            return current && current < moment().startOf('day');
-                        }} style={{ width: "100%" }} placeholder='Ngày Check Out' showTime format="YYYY-MM-DD HH:mm" onChange={() => { calculateTotal(form.getFieldValue('quantity'), prop.prop.price) }} />
+                            return current && current <= moment().startOf('day');
+                        }} style={{ width: "100%" }} placeholder='Ngày Check Out' format="YYYY-MM-DD HH:mm" onChange={() => { calculateTotal(form.getFieldValue('quantity'), prop.prop.price) }} />
                     </Form.Item>
                     <h2 style={{ marginRight: "10px", color: "rgba(255,94,31,1.00)" }}>{new Intl.NumberFormat().format(finalPrice)} VND</h2>
                 </Form>
