@@ -626,7 +626,7 @@ const SignUpPage = () => {
         try {
             const siginUpApi = await signUpApi({
                 name: values.username,
-                email: email,
+                email: values.email,
                 password: values.password,
                 age: values.age,
                 gender: values.gender,
