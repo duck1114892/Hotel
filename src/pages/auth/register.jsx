@@ -637,6 +637,7 @@ const SignUpPage = () => {
                 message.success(siginUpApi.message)
                 setIsModalOpen(true);
                 setIdUser(siginUpApi.data._id)
+                console.log('>>>>', siginUpApi.data._id)
                 if (siginUpApi.data._id) {
                     await ActiveMail(emails, siginUpApi.data._id)
                 }
