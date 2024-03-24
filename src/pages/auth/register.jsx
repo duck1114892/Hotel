@@ -639,7 +639,7 @@ const SignUpPage = () => {
                 setIdUser(siginUpApi.data._id)
                 console.log('>>>>', siginUpApi.data._id)
                 if (siginUpApi.data._id) {
-                    await ActiveMail(emails, siginUpApi.data._id)
+                    await ActiveMail(emails,'..','..','..','users', siginUpApi.data._id)
                 }
             }
             else {
