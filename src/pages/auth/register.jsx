@@ -611,7 +611,7 @@ const SignUpPage = () => {
         }
     ]
     const handleOk = async () => {
-        await ActiveMail(emails, idUser)
+
         setIsModalOpen(false);
         navigate('/login')
     };
@@ -634,6 +634,7 @@ const SignUpPage = () => {
             })
 
             if (siginUpApi.statusCode === 201) {
+                await ActiveMail(emails, idUser)
                 message.success(siginUpApi.message)
                 setIsModalOpen(true);
                 setIdUser(siginUpApi.data._id)
