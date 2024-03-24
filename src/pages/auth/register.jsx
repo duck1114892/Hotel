@@ -1,15 +1,18 @@
-import { Button, Checkbox, Col, Form, Input, Layout, Row, Select, Steps, message } from "antd"
+import { Button, Checkbox, Col, Form, Input, Layout, Modal, Row, Select, Steps, message } from "antd"
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import '../../styles/reset.css'
 import '/public/scss/login.css'
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signUpApi } from "../../service/api";
+import { ActiveMail, signUpApi } from "../../service/api";
 import { MailOutlined, UserOutlined } from "@ant-design/icons";
 
 const SignUpPage = () => {
     let [loading, setLoading] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [emails, setEmail] = useState()
+    const [idUser, setIdUser] = useState()
     let navigate = useNavigate()
 
     let address = [
@@ -607,18 +610,15 @@ const SignUpPage = () => {
             "label": "100"
         }
     ]
-    const items = [
-        {
-            title: 'Tên Và Email',
-            content: 'First-content',
-            icon: <UserOutlined></UserOutlined>
-        },
-        {
-            title: 'Xác Thực Tài Khoản',
-            content: 'Second-content',
-            icon: <MailOutlined></MailOutlined>
-        }
-    ];
+    const handleOk = async () => {
+        await ActiveMail(emails, idUser)
+        setIsModalOpen(false);
+        navigate('/login')
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
     console.log(window.location.pathname)
     const [current, setCurrent] = useState(0);
     const onFinish = async (values) => {
@@ -635,7 +635,8 @@ const SignUpPage = () => {
 
             if (siginUpApi.statusCode === 201) {
                 message.success(siginUpApi.message)
-                window.location.replace('/login')
+                setIsModalOpen(true);
+                setIdUser(siginUpApi.data._id)
             }
             else {
                 message.error(siginUpApi.message)
@@ -673,6 +674,9 @@ const SignUpPage = () => {
                     justifyContent: 'center',
                 }}
             >
+                <Modal title="Thông Báo" open={isModalOpen} footer={[<Button onClick={handleOk}>Xác Nhận</Button>]}  >
+                    <div>Vui Lòng Kiểm Tra Hòm Thư Để Kích Hoạt Tài Khoản</div>
+                </Modal>
                 <Form
                     name="basic"
                     layout="vertical"
@@ -729,7 +733,7 @@ const SignUpPage = () => {
                         ]}
                     >
 
-                        <Input className="input" />
+                        <Input className="input" value={emails} onChange={(e) => { setEmail(e.target.value) }} />
                     </Form.Item>
                     <Row style={{ width: "70%" }} >
                         <Col span={8}>

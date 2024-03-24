@@ -17,14 +17,13 @@ import HotelHome from './pages/user/outlet/hotelHome';
 import RoomHome from './pages/user/outlet/roomHome';
 import HotelDetail from './pages/user/outlet/hotelDetail';
 import BookingDetail from './pages/user/outlet/bookingDetail';
-import VerifyMail from './pages/auth/verifyMail';
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
+
     const fetchData = async () => {
       const refesht = await refesh();
-      console.log(refesht)
       if (refesht && refesht.data) {
         dispatch(isLogin(refesht.data));
       } else {
@@ -32,12 +31,19 @@ const App = () => {
       }
     };
     fetchData();
+
+
   }, []);
 
   const router = createBrowserRouter([
     {
       path: '/login',
-      element: <LoginPage />,
+      children: [
+        {
+          path: '',
+          element: <LoginPage />
+        }
+      ],
     },
     {
       path: '/signUp',

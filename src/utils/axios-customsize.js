@@ -42,8 +42,7 @@ instance.interceptors.response.use(
         }
 
         else {
-            console.log(error)
-            if (error.response.status === 401 && window.location.pathname !== '/login') {
+            if (error?.response?.status === 401 && window.location.pathname !== '/login') {
                 window.location.replace('/login')
             }
             message.error(error.response.data.message)

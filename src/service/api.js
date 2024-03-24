@@ -17,6 +17,9 @@ export const getUser = (current, pageSize, email) => {
 export const getListUser = () => {
     return axios.get(`/api/v1/users`)
 }
+export const getUserByEmail = (id) => {
+    return axios.get(`/api/v1/users/email/${id}`)
+}
 export const getPermission = () => {
     return axios.get('/api/v1/permissions')
 }
@@ -149,6 +152,7 @@ export const sendMailBooking = (name, email, roomName, img, checkIn, checkOut) =
 export const CheckMail = (mail) => {
     return axios.post('/api/v1/auth/checkMail', { email: mail })
 }
-export const verifyMailApi = (email) => {
-    return axios.post(`/api/v1/mail/verifyMail`, { email: email, link: `${import.meta.env.VITE_FE_URL}/signUp/${email}` })
+export const ActiveMail = (email, id) => {
+    return axios.post('/api/v1/mail/verifMail', { email, link: `${import.meta.env.VITE_BE_URL}/api/v1/users/activeAccount/${id}` })
 }
+

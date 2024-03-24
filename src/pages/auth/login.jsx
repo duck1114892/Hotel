@@ -1,34 +1,38 @@
 import { Button, Checkbox, Form, Input, Layout, message, notification } from "antd"
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import '../../styles/reset.css'
-import { loginApi } from "../../service/api";
+import { getUserByEmail, loginApi } from "../../service/api";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as React from 'react';
 import instance from "../../utils/axios-customsize";
+import { useEffect } from "react";
 const LoginPage = () => {
     const nagivate = useNavigate()
     const onFinish = async (values) => {
         const data = await loginApi(values.username, values.password)
-        try {
-            if (data.statusCode === 201) {
-                message.success(`Xin Chào ${data.data.user.email}`)
-                localStorage.setItem('access_token', data.data.access_token)
-                location.replace('/')
+        const statusAccount = await getUserByEmail(values.username)
+        if (statusAccount.data.statusAccount === true) {
+            try {
+
+                if (data.statusCode === 201) {
+                    message.success(`Xin Chào ${data.data.user.email}`)
+                    localStorage.setItem('access_token', data.data.access_token)
+                    location.replace('/')
+                }
+                else {
+                    message.error(data.message)
+                }
+            } catch (error) {
+                message.error("LỖi")
             }
-            else {
-                message.error(data.message)
-            }
-        } catch (error) {
-            message.error("LỖi")
         }
-
-
-
+        else {
+            message.error("Tài Khoản Của Bạn Chưa Được Kích Hoạt Vui Lòng Kiểm Tra Hòm Thư")
+        }
 
     };
     const onFinishFailed = (errorInfo) => {
-
     };
 
     return (
