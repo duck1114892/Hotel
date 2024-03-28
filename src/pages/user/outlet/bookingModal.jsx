@@ -15,6 +15,7 @@ const BookingModal = (prop) => {
     const [total, setTotal] = useState();
     const [isQuantity, setQuantity] = useState(1);
     const [maxRoom, setMaxRoom] = useState(1);
+    const [checkInDate, setCheckInDate] = useState()
     const [finalPrice, setFinalPrice] = useState(0);
     const [form] = useForm();
     const showModal = () => {
@@ -33,6 +34,7 @@ const BookingModal = (prop) => {
 
     const calculateTotal = (quantity, pricePerDay) => {
         const startDate = form.getFieldValue('checkIn');
+        setCheckInDate(startDate)
         const endDate = form.getFieldValue('checkOut');
         if (!endDate && !startDate) {
             setFinalPrice(pricePerDay)
@@ -46,25 +48,31 @@ const BookingModal = (prop) => {
     const onFinish = async (values) => {
         const formattedCheckIn = values.checkIn.toISOString();
         const formattedCheckOut = values.checkOut.toISOString();
-        try {
-            const res = await createBooking({
-                userId: getId,
-                roomId: prop.prop._id,
-                quantity: 1,
-                total: finalPrice,
-                checkInDate: formattedCheckIn,
-                checkOutDate: formattedCheckOut,
-                status: "PENDING"
-            });
-            if (res.statusCode === 201) {
-                message.success(res.message);
-                setIsModalOpen(false);
-            } else {
-                message.error(res.message);
-            }
-        } catch (error) {
-            message.error(error.response.data.message);
+        if (finalPrice <= 0) {
+            message.error("Vui Lòng Kiểm Tra Lại Ngày Đặt")
         }
+        else {
+            try {
+                const res = await createBooking({
+                    userId: getId,
+                    roomId: prop.prop._id,
+                    quantity: 1,
+                    total: finalPrice,
+                    checkInDate: formattedCheckIn,
+                    checkOutDate: formattedCheckOut,
+                    status: "PENDING"
+                });
+                if (res.statusCode === 201) {
+                    message.success(res.message);
+                    setIsModalOpen(false);
+                } else {
+                    message.error(res.message);
+                }
+            } catch (error) {
+                message.error(error.response.data.message);
+            }
+        }
+
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -115,7 +123,7 @@ const BookingModal = (prop) => {
                         ]}
                     >
                         <DatePicker disabledDate={(current) => {
-                            return current && current <= moment().startOf('day');
+                            return current && current < moment().startOf('day');
                         }} style={{ width: "100%" }} placeholder='Ngày Check Out' format="YYYY-MM-DD HH:mm" onChange={() => { calculateTotal(form.getFieldValue('quantity'), prop.prop.price) }} />
                     </Form.Item>
                     <h2 style={{ marginRight: "10px", color: "rgba(255,94,31,1.00)" }}>{new Intl.NumberFormat().format(finalPrice)} VND</h2>
