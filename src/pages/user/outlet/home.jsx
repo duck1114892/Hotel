@@ -166,8 +166,8 @@ const Home = () => {
                                         maxWidth: "392px",
                                         height: "250px",
                                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                                        background: "url('../../../../public/img/hcm.jpg')",
-                                        backgroundImage: "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%) ,url('../../../../public/img/hcm.jpg')"
+                                        background: "url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/DJI_0550-HDR-Pano.jpg/800px-DJI_0550-HDR-Pano.jpg')",
+                                        backgroundImage: "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%) ,url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/DJI_0550-HDR-Pano.jpg/800px-DJI_0550-HDR-Pano.jpg')"
                                     }}
                                 >
                                     <div style={{ color: "white", width: "100%", display: 'flex', justifyContent: "center", fontWeight: "500", fontSize: "30px" }}>Hồ Chí Minh</div>
@@ -182,8 +182,8 @@ const Home = () => {
                                         maxWidth: "392px",
                                         height: "250px",
                                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                                        background: "url('../../../../public/img/hcm.jpg')",
-                                        backgroundImage: "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%) ,url('../../../../public/img/hn.jpg')"
+                                        background: "url('https://vcdn1-dulich.vnecdn.net/2022/05/11/hoan-kiem-lake-7673-1613972680-1508-1652253984.jpg?w=0&h=0&q=100&dpr=1&fit=crop&s=2wB1cBTUcNKuk68nrG6LMQ')",
+                                        backgroundImage: "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%) ,url('https://vcdn1-dulich.vnecdn.net/2022/05/11/hoan-kiem-lake-7673-1613972680-1508-1652253984.jpg?w=0&h=0&q=100&dpr=1&fit=crop&s=2wB1cBTUcNKuk68nrG6LMQ')"
                                     }}
                                 >
                                     <div style={{ color: "white", width: "100%", display: 'flex', justifyContent: "center", fontWeight: "500", fontSize: "30px" }}>Hà Nội</div>
@@ -198,8 +198,8 @@ const Home = () => {
                                         maxWidth: "392px",
                                         height: "250px",
                                         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                                        background: "url('../../../../public/img/hcm.jpg')",
-                                        backgroundImage: "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%) ,url('../../../../public/img/dn.jpg')"
+                                        background: "url('https://res.klook.com/image/upload/fl_lossy.progressive,w_800,c_fill,q_85/destination/ur2mrg23d91mex03l4mw.jpg')",
+                                        backgroundImage: "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%) ,url('https://res.klook.com/image/upload/fl_lossy.progressive,w_800,c_fill,q_85/destination/ur2mrg23d91mex03l4mw.jpg')"
                                     }}
                                 >
                                     <div style={{ color: "white", width: "100%", display: 'flex', justifyContent: "center", fontWeight: "500", fontSize: "30px" }}>Đà Nẵng</div>

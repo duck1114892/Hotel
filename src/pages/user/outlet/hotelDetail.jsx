@@ -141,7 +141,7 @@ const HotelDetail = () => {
                                     {room.length === 0 ? (<Spin></Spin>) : (
                                         <div>  {room?.map((item) => {
                                             return (<Col span={24} key={item?.data._id} style={{ marginTop: "30px", backgroundColor: "white", borderRadius: "10px", display: "flex", margin: "10px auto", height: "200px" }}>
-                                                <img style={{ width: "200px", borderRadius: "10px" }} alt="example" src={`http://localhost:9900/images/default/${item?.data?.img}`} />
+                                                <img style={{ width: "200px", borderRadius: "10px" }} alt="example" src={`${baseUrl}/images/default/${item?.data?.img}`} />
                                                 <div style={{ marginLeft: "2%", width: "50%" }}>
                                                     <h2 style={{ marginTop: "30px" }}>{item?.data?.name}</h2>
                                                     <h4 style={{ color: "rgba(255,94,31,1.00)", marginTop: "10px" }}>{new Intl.NumberFormat().format(item?.data?.price)} VND</h4>
