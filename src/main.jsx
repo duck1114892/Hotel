@@ -19,7 +19,7 @@ if (isMobile() || isSmallWidth()) {
     <Result
       title="Hiện Website chưa hỗ trợ trên di động vui lòng tải app để có trải nghiệm tốt hơn"
       extra={
-        <a href='https://expo.dev/artifacts/eas/vDRPBFMLSjH7TqRLyBqyda.aab'><Button type="primary" key="console">
+        <a href='https://expo.dev/artifacts/eas/p5fx9jw3Pumv8h9QpSui3f.apk'><Button type="primary" key="console">
           Tải App
         </Button></a>
 
